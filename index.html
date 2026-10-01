@@ -355,14 +355,15 @@ html.is-loading .intro > *, html.is-loading .hero h1 .w, html.is-loading .orbit 
 }
 
 /* store sheet (touch) */
-.sheet-ov { position: fixed; inset: 0; z-index: 70; background: rgba(5, 8, 14, 0.45); opacity: 0; pointer-events: none; transition: opacity .35s ease; }
+.sheet-ov { touch-action: none; position: fixed; inset: 0; z-index: 70; background: rgba(5, 8, 14, 0.45); opacity: 0; pointer-events: none; transition: opacity .35s ease; }
 .sheet-ov.open { opacity: 1; pointer-events: auto; }
 .sheet {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 71; margin-inline: auto; max-width: 520px;
   background: var(--surface); color: var(--ink); border-radius: 26px 26px 0 0; box-shadow: 0 -20px 60px -20px rgba(0,0,0,.45);
-  padding: 10px 20px calc(22px + env(safe-area-inset-bottom, 0px)); display: grid; gap: 18px;
+  padding: 10px 20px calc(22px + env(safe-area-inset-bottom, 0px)); display: grid; gap: 18px; touch-action: none; overscroll-behavior: contain;
   transform: translateY(105%); visibility: hidden; transition: transform .45s var(--ease), visibility 0s linear .45s;
 }
+html.sheet-lock, html.sheet-lock body { overflow: hidden; }
 .sheet.open { transform: translateY(0); visibility: visible; transition: transform .45s var(--ease), visibility 0s; }
 .sheet .grab { width: 40px; height: 5px; border-radius: 3px; background: var(--line); justify-self: center; }
 .sh-head { display: flex; gap: 14px; align-items: center; }
@@ -1154,13 +1155,13 @@ function openSheet(a, from) {
   as.href = a.as; as.innerHTML = APPLE + "App Store";
   gp.hidden = !a.gp; if (a.gp) { gp.href = a.gp; gp.innerHTML = PLAY + "Google Play"; }
   sheet.style.transform = "";
-  sheet.classList.add("open"); sheetOv.classList.add("open");
+  sheet.classList.add("open"); sheetOv.classList.add("open"); root.classList.add("sheet-lock");
   $("sh-see").focus({ preventScroll: true });
 }
 function closeSheet() {
   if (!sheet) return;
   sheet.style.transform = "";
-  sheet.classList.remove("open"); sheetOv.classList.remove("open");
+  sheet.classList.remove("open"); sheetOv.classList.remove("open"); root.classList.remove("sheet-lock");
   if (sheetFrom) sheetFrom.focus({ preventScroll: true });
 }
 document.addEventListener("click", function (e) {
@@ -1178,7 +1179,8 @@ document.addEventListener("click", function (e) {
 (function () {
   var sh = $("sheet"), y0 = null, dy = 0;
   sh.addEventListener("touchstart", function (e) { y0 = e.touches[0].clientY; dy = 0; sh.style.transition = "none"; }, { passive: true });
-  sh.addEventListener("touchmove", function (e) { if (y0 === null) return; dy = Math.max(0, e.touches[0].clientY - y0); sh.style.transform = "translateY(" + dy + "px)"; }, { passive: true });
+  sh.addEventListener("touchmove", function (e) { if (y0 === null) return; e.preventDefault(); dy = Math.max(0, e.touches[0].clientY - y0); sh.style.transform = "translateY(" + dy + "px)"; }, { passive: false });
+  $("sheet-ov").addEventListener("touchmove", function (e) { e.preventDefault(); }, { passive: false });
   sh.addEventListener("touchend", function () { sh.style.transition = ""; if (dy > 70) closeSheet(); else sh.style.transform = ""; y0 = null; });
 })();
 document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeSheet(); });
