@@ -1,0 +1,1556 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Eslam Negm · Flutter Developer</title>
+<meta name="description" content="Eslam Negm, Mobile Application Developer (Flutter & Dart). Eight production apps on the App Store and Google Play: games, enterprise, events, social and commerce.">
+<meta name="author" content="Eslam Negm">
+<meta name="theme-color" content="#f3f4f8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#070b14" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Eslam Negm · Flutter Developer">
+<meta property="og:description" content="Eslam Negm, Mobile Application Developer (Flutter & Dart). Eight production apps on the App Store and Google Play: games, enterprise, events, social and commerce.">
+<meta property="og:image" content="https://eslamnegm010.github.io/og.jpg">
+<meta property="og:url" content="https://eslamnegm010.github.io/">
+<link rel="canonical" href="https://eslamnegm010.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Eslam Negm · Flutter Developer">
+<meta name="twitter:description" content="Eslam Negm, Mobile Application Developer (Flutter & Dart). Eight production apps on the App Store and Google Play: games, enterprise, events, social and commerce.">
+<meta name="twitter:image" content="https://eslamnegm010.github.io/og.jpg">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="img/me.jpg">
+<style>[hidden]{display:none!important}html{color-scheme:light;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}body{margin:0;font:14px/1.5 system-ui,sans-serif}img{max-width:100%}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Reem+Kufi:wght@600;700&display=swap">
+<style>
+/* Layout: hero = name + an "app orbit" (every shipped app circles a phone that shows whichever app passes in front);
+   an app rail under the intro becomes a floating dock once you pass it; each app is a free-flowing section whose
+   screens deal out like cards as it rises into view while the page takes the app's colour. English and Arabic (RTL). */
+:root {
+  --bg: #f3f4f8;
+  --surface: #ffffff;
+  --ink: #0d1322;
+  --muted: #5a6378;
+  --line: #dde1eb;
+  --accent: #1d4ed8;
+  --gold: #b8892c;
+  --band: #0b1120;
+  --band-ink: #eef1f8;
+  --band-muted: #95a1b8;
+  --band-line: #222d44;
+  --tint: #1d4ed8;
+  --tint-mix: 0%;
+  --ring: rgba(13, 19, 34, 0.14);
+  --shadow: 0 30px 60px -28px rgba(13, 19, 34, 0.45);
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --arabic: "Reem Kufi", "Geeza Pro", "Noto Kufi Arabic", sans-serif;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #070b14; --surface: #101827; --ink: #e9edf6; --muted: #9aa5ba; --line: #1f2a3f;
+    --accent: #7d9cff; --gold: #e6b65c; --band: #0f1729; --band-line: #26334f;
+    --ring: rgba(233, 237, 246, 0.14); --shadow: 0 30px 60px -28px rgba(0, 0, 0, 0.9);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #070b14; --surface: #101827; --ink: #e9edf6; --muted: #9aa5ba; --line: #1f2a3f;
+  --accent: #7d9cff; --gold: #e6b65c; --band: #0f1729; --band-line: #26334f;
+  --ring: rgba(233, 237, 246, 0.14); --shadow: 0 30px 60px -28px rgba(0, 0, 0, 0.9);
+  color-scheme: dark;
+}
+:root[lang="ar"] {
+  --display: "Alexandria", "Geeza Pro", "Noto Kufi Arabic", sans-serif;
+  --body: "IBM Plex Sans Arabic", "Geeza Pro", "Segoe UI", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body { overflow-x: clip; overscroll-behavior-y: none; }
+.lb[hidden] { display: none; }
+html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+
+body {
+  background: color-mix(in srgb, var(--tint) var(--tint-mix), var(--bg));
+  color: var(--ink); font: 400 1rem/1.6 var(--body); padding-inline: 20px;
+  transition: background-color 0.8s ease;
+}
+body.tinted { --tint-mix: 10%; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) body.tinted { --tint-mix: 17%; } }
+:root[data-theme="dark"] body.tinted { --tint-mix: 17%; }
+.wrap { max-width: 1180px; margin-inline: auto; display: grid; gap: 120px; padding-block: 0 40px; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 8px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; }
+p { margin: 0; }
+.label { font: 500 0.72rem/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+section { scroll-margin-top: 72px; }
+:root[lang="ar"] h1, :root[lang="ar"] h2, :root[lang="ar"] h3 { letter-spacing: 0 !important; }
+:root[lang="ar"] .label, :root[lang="ar"] .pill small, :root[lang="ar"] .c-row .k, :root[lang="ar"] .note, :root[lang="ar"] .now { font-family: var(--body); letter-spacing: 0; font-size: 0.8rem; }
+:root[lang="ar"] .lede, :root[lang="ar"] .desc { line-height: 1.8; }
+
+/* loader */
+.loader {
+  position: fixed; inset: 0; z-index: 100; background: var(--bg); display: grid; place-items: center; align-content: center; gap: 28px;
+  clip-path: circle(150% at 50% 46%); transition: clip-path .8s cubic-bezier(.7, 0, .2, 1);
+  animation: ldFailsafe 0s linear 7s forwards;
+}
+@keyframes ldFailsafe { to { visibility: hidden; pointer-events: none; } }
+.loader.out { clip-path: circle(0% at 50% 46%); }
+.ld-stage { position: relative; width: 300px; height: 300px; --R: 116px; }
+.ld-ring { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+.ld-track { fill: none; stroke: var(--line); stroke-width: 2; }
+.ld-bar { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round; }
+.ld-orbit { position: absolute; inset: 0; animation: ldSpin 9s linear infinite; transition: transform .5s cubic-bezier(.6, 0, .4, 1), opacity .45s ease; }
+@keyframes ldSpin { to { transform: rotate(360deg); } }
+.ld-orbit img {
+  position: absolute; left: 50%; top: 50%; width: 42px; height: 42px; margin: -21px 0 0 -21px; border-radius: 12px; box-shadow: 0 10px 22px -12px rgba(0,0,0,.5);
+  transform: rotate(calc(var(--k) * 45deg)) translate(var(--R)) rotate(calc(var(--k) * -45deg)) scale(.35); opacity: .12;
+  transition: transform .6s cubic-bezier(.2, .8, .2, 1), opacity .5s ease;
+}
+.ld-orbit img.ok { transform: rotate(calc(var(--k) * 45deg)) translate(var(--R)) rotate(calc(var(--k) * -45deg)); opacity: 1; }
+.ld-orbit img.ok { animation: ldCounter 9s linear infinite; }
+@keyframes ldCounter { from { rotate: 0deg; } to { rotate: -360deg; } }
+.loader.done .ld-orbit { transform: rotate(200deg) scale(.15); opacity: 0; animation-play-state: paused; }
+.ld-core { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; gap: 6px; }
+.ld-core b { font: 800 40px/1 "Bricolage Grotesque", system-ui, sans-serif; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; color: var(--ink); }
+.ld-core b::after { content: "%"; font-size: .45em; color: var(--muted); margin-inline-start: 2px; }
+.ld-core span { font: 500 10px/1.2 "JetBrains Mono", ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.ld-mark { font: 800 17px/1 "Bricolage Grotesque", system-ui, sans-serif; letter-spacing: -0.02em; color: var(--ink); opacity: .8; }
+.ld-mark span { color: var(--accent); }
+.loader.done .ld-core, .loader.done .ld-mark { transition: opacity .4s ease, transform .5s cubic-bezier(.6, 0, .4, 1); opacity: 0; transform: scale(.9); }
+html.is-loading { overflow: hidden; }
+html.is-loading .intro > *, html.is-loading .hero h1 .w, html.is-loading .orbit { animation-play-state: paused; }
+@media (max-width: 640px) {
+  .ld-stage { width: 260px; height: 260px; --R: 100px; }
+  .ld-orbit img { width: 38px; height: 38px; margin: -19px 0 0 -19px; border-radius: 11px; }
+  .ld-core b { font-size: 34px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .loader { transition: opacity .3s ease; clip-path: none; }
+  .loader.out { opacity: 0; clip-path: none; }
+  .ld-orbit, .ld-orbit img.ok { animation: none; }
+}
+
+/* top bar */
+.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; margin-inline: -20px; padding: 12px 20px;
+  background: color-mix(in srgb, var(--bg) 94%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
+}
+.top-in { max-width: 1180px; margin-inline: auto; display: flex; align-items: center; gap: 16px; }
+.mark { font: 800 1.1rem/1 "Bricolage Grotesque", system-ui, sans-serif; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; flex: none; margin-inline-end: auto; }
+.mark span { color: var(--accent); }
+.top nav { display: flex; gap: 4px; align-items: center; min-width: 0; }
+.top nav a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; padding: 7px 12px; border-radius: 999px; white-space: nowrap; transition: color .2s, background-color .2s; }
+.top nav a:hover { color: var(--ink); }
+.top nav a.here { color: var(--ink); background: color-mix(in srgb, var(--ink) 8%, transparent); }
+.top nav a.cta { color: var(--bg); background: var(--ink); margin-inline-start: 6px; }
+.lang { direction: ltr; position: relative; display: grid; grid-template-columns: 1fr 1fr; padding: 3px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); flex: none; }
+.lang button { position: relative; z-index: 1; border: 0; background: none; color: var(--muted); cursor: pointer; padding: 6px 12px; border-radius: 999px; font: 600 0.8rem/1 "Instrument Sans", system-ui, sans-serif; min-width: 40px; transition: color .25s; }
+.lang button[lang="ar"] { font-family: "IBM Plex Sans Arabic", system-ui, sans-serif; font-size: 0.86rem; }
+.lang button[aria-pressed="true"] { color: var(--bg); }
+.lang .knob { position: absolute; top: 3px; bottom: 3px; left: 3px; width: calc(50% - 3px); border-radius: 999px; background: var(--ink); transition: transform .35s var(--ease); }
+.lang.is-ar .knob { transform: translateX(100%); }
+.menu-btn { display: none; place-items: center; width: 42px; height: 42px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; padding: 0; flex: none; }
+.menu-btn svg { width: 20px; height: 20px; }
+.menu-btn .x { display: none; }
+.top.menu-open .menu-btn .x { display: block; }
+.top.menu-open .menu-btn .bars { display: none; }
+.progress { position: absolute; inset-inline-start: 0; bottom: -1px; height: 2px; width: 100%; background: var(--tint); transform-origin: left; transform: scaleX(0); }
+:root[dir="rtl"] .progress { transform-origin: right; }
+
+/* hero */
+.hero { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 24px; align-items: center; padding-top: 28px; }
+.hero::before {
+  content: ""; position: absolute; inset: -40px -40vw -80px; z-index: -1; pointer-events: none;
+  background-image: radial-gradient(var(--ring) 1px, transparent 1.4px); background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(ellipse 50% 60% at var(--mx, 70%) 45%, #000 20%, transparent 75%);
+  mask-image: radial-gradient(ellipse 50% 60% at var(--mx, 70%) 45%, #000 20%, transparent 75%);
+}
+:root[dir="rtl"] .hero { --mx: 30%; }
+.glow { position: absolute; z-index: -1; width: 620px; height: 620px; left: var(--gx, 70%); top: var(--gy, 45%); transform: translate(-50%, -50%); pointer-events: none;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--hero-c, var(--accent)) 24%, transparent), transparent 70%);
+  transition: background 1s ease; }
+:root[dir="rtl"] .glow { left: var(--gx, 30%); }
+.hero-text { display: grid; gap: 20px; min-width: 0; position: relative; z-index: 2; }
+.avail { display: inline-flex; align-items: center; gap: 8px; width: fit-content; padding: 6px 12px 6px 10px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-size: 0.85rem; font-weight: 500; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #16a34a; box-shadow: 0 0 0 4px color-mix(in srgb, #16a34a 22%, transparent); }
+.alt-name { font: 700 1.6rem/1 var(--arabic); color: var(--gold); }
+.alt-name:lang(en) { font: 700 1.3rem/1 "Bricolage Grotesque", system-ui, sans-serif; letter-spacing: -0.01em; }
+.hero h1 { font-size: clamp(3.4rem, 9vw, 7rem); font-weight: 800; line-height: 0.88; letter-spacing: -0.05em; }
+:root[lang="ar"] .hero h1 { line-height: 1.1; font-size: clamp(3rem, 8vw, 6rem); }
+.hero h1 .w { display: inline-block; }
+.role { font: 500 clamp(1.15rem, 2.2vw, 1.45rem)/1.4 var(--display); }
+.role b { color: var(--accent); font-weight: 700; }
+.lede { max-width: 52ch; color: var(--muted); font-size: 1.05rem; }
+.actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 999px; font: 600 0.95rem/1 var(--body); text-decoration: none; border: 1px solid var(--line); color: var(--ink); background: var(--surface); cursor: pointer; transition: border-color .2s, transform .2s var(--ease); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn:hover { border-color: var(--accent); transform: translateY(-1px); }
+.btn svg { width: 16px; height: 16px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .intro > * { animation: up 0.9s var(--ease) both; }
+  .intro > :nth-child(2) { animation-delay: .06s; }
+  .intro > :nth-child(3) { animation-delay: .12s; }
+  .intro > :nth-child(4) { animation-delay: .2s; }
+  .intro > :nth-child(5) { animation-delay: .28s; }
+  .intro > :nth-child(6) { animation-delay: .36s; }
+  .orbit { animation: zoom 1.2s var(--ease) both .1s; }
+  .swap { animation: fadeIn .45s var(--ease) both; }
+  @keyframes up { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+  @keyframes zoom { from { opacity: 0; transform: scale(.88); } to { opacity: 1; transform: none; } }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+}
+
+.hello { display: flex; align-items: center; gap: 12px; }
+.me-btn { padding: 0; border: 0; background: none; cursor: zoom-in; border-radius: 50%; flex: none; display: block; transition: transform .3s var(--ease); }
+.me-btn:hover { transform: scale(1.06); }
+.me { width: 68px; height: 68px; border-radius: 50%; object-fit: cover; display: block; box-shadow: 0 0 0 3px var(--surface), 0 0 0 4px var(--line); }
+.ph-ov { position: fixed; inset: 0; z-index: 60; background: color-mix(in srgb, var(--bg) 55%, transparent); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); cursor: zoom-out; }
+.ph-big { position: fixed; z-index: 61; object-fit: cover; border-radius: 28px; cursor: zoom-out; box-shadow: 0 0 0 4px var(--surface), 0 34px 80px -24px rgba(0,0,0,.6); }
+.contact-me { display: flex; align-items: center; gap: 14px; }
+.contact-me img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; display: block; box-shadow: 0 0 0 3px color-mix(in srgb, var(--band-ink) 12%, transparent); }
+
+/* contact side bar */
+.side {
+  position: fixed; z-index: 26; inset-inline-end: 20px; top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 8px; border-radius: 999px;
+  background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow);
+}
+.s-btn {
+  position: relative; width: 50px; height: 50px; border-radius: 50%; display: grid; place-items: center; padding: 0;
+  color: var(--brand); background: color-mix(in srgb, var(--brand) 13%, var(--surface)); border: 0; cursor: pointer; text-decoration: none;
+  transition: background-color .25s, color .25s, transform .25s var(--ease), opacity .3s;
+}
+.s-btn svg { width: 22px; height: 22px; }
+.s-btn:hover, .s-btn:focus-visible { background: var(--brand); color: #fff; transform: scale(1.06); }
+.s-btn.gh:hover, .s-btn.gh:focus-visible { color: var(--bg); }
+.s-btn::before {
+  content: attr(data-tip); position: absolute; inset-inline-end: calc(100% + 14px); top: 50%; transform: translateY(-50%) scale(.92);
+  direction: ltr; unicode-bidi: plaintext; font: 600 0.9rem/1 "Instrument Sans", system-ui, sans-serif; white-space: nowrap;
+  color: #fff; background: var(--brand); padding: 12px 16px; border-radius: 999px; box-shadow: 0 12px 28px -12px var(--brand);
+  opacity: 0; pointer-events: none; transition: opacity .2s, transform .25s var(--ease);
+}
+.s-btn.gh::before { color: var(--bg); }
+@media (hover: hover) { .s-btn:hover::before, .s-btn:focus-visible::before { opacity: 1; transform: translateY(-50%) scale(1); } }
+.s-fab, .s-hint { display: none; }
+.toast {
+  position: fixed; left: 50%; bottom: calc(96px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); z-index: 40;
+  background: var(--ink); color: var(--bg); font: 600 0.85rem/1.3 var(--body); padding: 10px 16px; border-radius: 12px; box-shadow: var(--shadow); max-width: calc(100vw - 40px);
+}
+.toast[hidden] { display: none; }
+@media (max-width: 1320px) {
+  .side { top: auto; bottom: calc(90px + env(safe-area-inset-bottom, 0px)); transform: none; inset-inline-end: 16px; display: block; width: 58px; height: 58px; padding: 0; background: none; border: 0; box-shadow: none; --dirx: -1; }
+  :root[dir="rtl"] .side { --dirx: 1; }
+  .side .s-btn {
+    position: absolute; right: 5px; bottom: 5px; width: 48px; height: 48px; color: #fff; background: var(--brand);
+    box-shadow: 0 12px 24px -12px var(--brand), 0 0 0 3px var(--surface);
+    opacity: 0; transform: translate(0, 0) scale(.3) rotate(-90deg); pointer-events: none;
+    transition: transform .45s var(--ease), opacity .3s ease; transition-delay: calc((4 - var(--i)) * 25ms);
+  }
+  :root[dir="rtl"] .side .s-btn { right: auto; left: 5px; }
+  .side .s-btn.gh { color: var(--bg); }
+  .side.open .s-btn {
+    opacity: 1; pointer-events: auto; transition-delay: calc(var(--i) * 45ms);
+    transform: translate(calc(var(--x) * var(--dirx)), var(--y)) scale(1) rotate(0);
+  }
+  .side .s-btn::before { display: none; }
+  .s-fab {
+    position: relative; z-index: 2; display: grid; place-items: center; width: 58px; height: 58px; border-radius: 50%; border: 0; padding: 0; cursor: pointer;
+    background: var(--fabc, #25d366); color: #fff; box-shadow: 0 16px 34px -12px var(--fabc, #25d366), 0 0 0 3px var(--surface);
+    transition: background-color .6s ease, box-shadow .6s ease, transform .35s var(--ease);
+  }
+  .s-fab::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--fabc, #25d366); pointer-events: none; animation: ping 2.6s ease-out infinite; }
+  @keyframes ping { 0% { transform: scale(1); opacity: .65; } 70%, 100% { transform: scale(1.7); opacity: 0; } }
+  .fab-icons { position: relative; width: 26px; height: 26px; perspective: 200px; }
+  .fab-icons svg { position: absolute; inset: 0; width: 26px; height: 26px; opacity: 0; transform: rotateY(90deg) scale(.7); transition: opacity .35s ease, transform .5s var(--ease); }
+  .fab-icons svg.on { opacity: 1; transform: none; }
+  .s-fab .x { display: none; width: 24px; height: 24px; }
+  .side.open .s-fab { background: var(--ink); color: var(--bg); box-shadow: var(--shadow); transform: rotate(90deg); }
+  .side.open .s-fab::after { animation: none; opacity: 0; }
+  .side.open .s-fab .x { display: block; }
+  .side.open .fab-icons { display: none; }
+  .s-hint {
+    display: block; position: absolute; bottom: 19px; inset-inline-end: calc(100% + 10px); white-space: nowrap; pointer-events: none;
+    font: 600 0.72rem/1 var(--body); color: var(--bg); background: var(--ink); padding: 6px 10px; border-radius: 999px; box-shadow: 0 8px 18px -10px rgba(0,0,0,.5);
+    opacity: 0; transform: translateX(calc(var(--dirx) * -8px)); transition: opacity .35s ease, transform .45s var(--ease);
+  }
+  .side.hint .s-hint { opacity: 1; transform: none; }
+  .side.open .s-hint { opacity: 0; }
+}
+@media (max-width: 1320px) and (prefers-reduced-motion: reduce) {
+  .s-fab::after { animation: none; }
+}
+@media (max-width: 640px) {
+  .side { bottom: calc(76px + env(safe-area-inset-bottom, 0px)); inset-inline-end: 12px; width: 54px; height: 54px; transition: bottom .45s var(--ease); }
+  .side.low { bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
+  .s-fab { width: 54px; height: 54px; }
+  .side .s-btn { right: 3px; bottom: 3px; }
+  :root[dir="rtl"] .side .s-btn { left: 3px; }
+  .me { width: 58px; height: 58px; }
+}
+
+/* orbit */
+.orbit { position: relative; height: 600px; min-width: 0; perspective: 1200px; }
+.orbit-in { position: absolute; inset: 0; transition: transform .6s var(--ease); }
+.ring { position: absolute; left: 50%; top: 50%; border: 1px dashed var(--ring); border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+.screen {
+  position: absolute; left: 50%; top: 50%; width: 200px; aspect-ratio: 9 / 19.5; transform: translate(-50%, -50%); z-index: 5;
+  border-radius: 34px; padding: 6px; background: #0b0f17; box-shadow: var(--shadow), 0 0 0 1.5px #2a3242 inset, 0 0 80px -10px color-mix(in srgb, var(--hero-c, var(--accent)) 55%, transparent);
+  transition: box-shadow 1s ease;
+}
+.screen-in { position: relative; width: 100%; height: 100%; border-radius: 28px; overflow: hidden; background: #0b0f17; }
+.screen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; transition: opacity .7s ease, transform 1.2s var(--ease); }
+.screen img.out { opacity: 0; transform: scale(1.06); }
+.now { position: absolute; left: 50%; top: calc(50% + 236px); transform: translateX(-50%); z-index: 6; white-space: nowrap;
+  font: 500 0.75rem/1 var(--mono); color: var(--muted); letter-spacing: .06em; display: flex; align-items: center; gap: 8px; }
+.now b { color: var(--ink); font-weight: 500; }
+.now i { width: 6px; height: 6px; border-radius: 50%; background: var(--hero-c, var(--accent)); }
+.planet { position: absolute; left: 0; top: 0; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 17px; display: block; will-change: transform, opacity; }
+.planet img { width: 100%; height: 100%; border-radius: inherit; display: block; box-shadow: 0 12px 26px -10px rgba(0,0,0,.55); }
+.planet span {
+  position: absolute; left: 50%; top: calc(100% + 8px); transform: translateX(-50%) translateY(4px); white-space: nowrap; pointer-events: none;
+  font: 600 0.76rem/1 var(--body); color: var(--ink); background: var(--surface); border: 1px solid var(--line); padding: 6px 9px; border-radius: 8px;
+  opacity: 0; transition: opacity .2s, transform .2s var(--ease);
+}
+.planet:hover span, .planet:focus-visible span { opacity: 1; transform: translateX(-50%); }
+
+/* app rail */
+.rail-wrap { display: grid; gap: 14px; margin-top: -56px; }
+.rail { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 10px; }
+.pill {
+  display: grid; justify-items: center; gap: 8px; padding: 14px 8px 12px; border-radius: 18px; text-decoration: none; color: var(--ink);
+  background: color-mix(in srgb, var(--surface) 80%, transparent); border: 1px solid var(--line); position: relative; overflow: hidden;
+  transition: transform .3s var(--ease), border-color .3s;
+}
+.pill::after { content: ""; position: absolute; inset: auto 20% 0; height: 3px; border-radius: 3px 3px 0 0; background: var(--c); transform: scaleX(0); transition: transform .3s var(--ease); }
+.pill:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--c) 50%, var(--line)); }
+.pill:hover::after { transform: scaleX(1); }
+.pill img { width: 52px; height: 52px; border-radius: 14px; box-shadow: 0 8px 18px -10px rgba(0,0,0,.5); }
+.pill b { font: 600 0.84rem/1.2 var(--display); text-align: center; }
+.pill small { font: 500 0.66rem/1 var(--mono); color: var(--muted); letter-spacing: .04em; text-transform: uppercase; text-align: center; }
+.pill-main { color: inherit; text-decoration: none; }
+.pill-main::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
+.pill-main:focus-visible { outline: none; }
+.pill:has(.pill-main:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
+.pill-sub { display: grid; place-items: center; height: 38px; width: 100%; }
+.pill-sub small, .pill-stores { grid-area: 1 / 1; transition: opacity .25s ease, transform .35s var(--ease); }
+.pill-stores { position: relative; z-index: 2; display: flex; gap: 6px; opacity: 0; transform: translateY(10px); pointer-events: none; }
+.ps { width: 44px; height: 38px; border-radius: 11px; display: grid; place-items: center; background: var(--ink); color: var(--bg); transition: transform .2s var(--ease), background-color .2s; }
+.ps svg { width: 19px; height: 19px; }
+.ps:hover { transform: translateY(-2px) scale(1.06); background: var(--c); color: #fff; }
+@media (hover: hover) {
+  .pill:hover .pill-stores, .pill:focus-within .pill-stores { opacity: 1; transform: none; pointer-events: auto; }
+  .pill:hover .pill-sub small, .pill:focus-within .pill-sub small { opacity: 0; transform: translateY(-10px); }
+}
+@media (hover: none) {
+  .pill-stores { display: none; }
+  .pill-sub { height: auto; }
+}
+
+/* store sheet (touch) */
+.sheet-ov { position: fixed; inset: 0; z-index: 70; background: rgba(5, 8, 14, 0.45); opacity: 0; pointer-events: none; transition: opacity .35s ease; }
+.sheet-ov.open { opacity: 1; pointer-events: auto; }
+.sheet {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 71; margin-inline: auto; max-width: 520px;
+  background: var(--surface); color: var(--ink); border-radius: 26px 26px 0 0; box-shadow: 0 -20px 60px -20px rgba(0,0,0,.45);
+  padding: 10px 20px calc(22px + env(safe-area-inset-bottom, 0px)); display: grid; gap: 18px;
+  transform: translateY(105%); visibility: hidden; transition: transform .45s var(--ease), visibility 0s linear .45s;
+}
+.sheet.open { transform: translateY(0); visibility: visible; transition: transform .45s var(--ease), visibility 0s; }
+.sheet .grab { width: 40px; height: 5px; border-radius: 3px; background: var(--line); justify-self: center; }
+.sh-head { display: flex; gap: 14px; align-items: center; }
+.sh-head img { width: 60px; height: 60px; border-radius: 16px; box-shadow: 0 10px 22px -10px rgba(0,0,0,.5); }
+.sh-head h3 { font-size: 1.25rem; font-weight: 800; line-height: 1.15; }
+.sh-head span { display: block; color: var(--muted); font-size: 0.88rem; margin-top: 4px; line-height: 1.35; }
+.sh-actions { display: grid; gap: 10px; }
+.sh-btn {
+  display: flex; align-items: center; justify-content: center; gap: 10px; height: 54px; border-radius: 16px; border: 1px solid var(--line);
+  background: var(--bg); color: var(--ink); font: 600 1rem/1 var(--body); text-decoration: none; cursor: pointer; width: 100%;
+}
+.sh-btn svg { width: 20px; height: 20px; }
+.sh-btn.primary { background: var(--c, var(--accent)); border-color: transparent; color: #fff; }
+.sh-btn:active { transform: scale(.98); }
+
+/* dock */
+.dock {
+  position: fixed; left: 50%; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 25;
+  display: flex; align-items: flex-end; gap: 8px; padding: 8px; border-radius: 22px;
+  background: color-mix(in srgb, var(--surface) 96%, transparent); border: 1px solid var(--line);
+  box-shadow: var(--shadow); transform: translate(-50%, 170%); transition: transform .5s var(--ease);
+}
+.dock.on { transform: translate(-50%, 0); }
+.dock a { position: relative; display: block; width: 44px; height: 44px; transition: width .3s var(--ease), height .3s var(--ease), margin .3s var(--ease); }
+.dock a img { width: 100%; height: 100%; display: block; border-radius: 12px; }
+.dock a.active { width: 54px; height: 54px; margin-top: -10px; }
+.dock a.active::after { content: ""; position: absolute; left: 50%; bottom: -6px; width: 4px; height: 4px; border-radius: 50%; background: var(--ink); transform: translateX(-50%); }
+.dock a::before {
+  content: attr(data-name); position: absolute; left: 50%; bottom: calc(100% + 12px); transform: translateX(-50%) translateY(4px);
+  font: 600 0.75rem/1 var(--body); white-space: nowrap; color: var(--bg); background: var(--ink); padding: 7px 10px; border-radius: 8px;
+  opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s var(--ease);
+}
+@media (hover: hover) { .dock a:hover::before { opacity: 1; transform: translateX(-50%); } }
+.dock .up { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; border: 1px solid var(--line); color: var(--ink); background: var(--surface); }
+.dock .up svg { width: 18px; height: 18px; }
+.dock .sep { width: 1px; align-self: stretch; background: var(--line); margin-inline: 2px; }
+
+/* work: free-flowing chapters, no pinning */
+.sec-head { display: grid; gap: 10px; max-width: 760px; }
+.sec-head h2 { font-size: clamp(2.1rem, 5vw, 3.4rem); font-weight: 800; letter-spacing: -0.035em; line-height: 1.05; }
+.sec-head p { color: var(--muted); font-size: 1.04rem; }
+#work { display: grid; gap: 24px; }
+#chapters { display: grid; }
+.chapter { position: relative; scroll-margin-top: 64px; }
+.stage { position: relative; min-height: min(96vh, 900px); display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(40px, 5vw, 88px); align-items: center; padding-block: 64px; }
+.ghost {
+  position: absolute; inset-inline-start: 0; bottom: 8%; z-index: 0; pointer-events: none; white-space: nowrap;
+  font: 800 clamp(6rem, 17vw, 15rem)/1 "Bricolage Grotesque", system-ui, sans-serif; letter-spacing: -0.05em;
+  color: transparent; -webkit-text-stroke: 1.5px color-mix(in srgb, var(--c) 50%, transparent); opacity: .5; will-change: transform;
+}
+.info { position: relative; z-index: 2; display: grid; gap: 16px; align-content: center; min-width: 0; }
+@media (min-width: 961px) { .info > * { will-change: transform, opacity; } }
+.count { font: 500 0.78rem/1 var(--mono); color: var(--muted); letter-spacing: 0.08em; display: flex; align-items: center; gap: 10px; }
+.count b { color: var(--ink); font-weight: 500; }
+.count .bar { width: 80px; height: 2px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.count .bar i { display: block; height: 100%; background: var(--c); transform-origin: left; transform: scaleX(0); }
+:root[dir="rtl"] .count .bar i { transform-origin: right; }
+.app-id { display: flex; gap: 16px; align-items: center; }
+.app-id img { width: 68px; height: 68px; border-radius: 18px; flex: none; box-shadow: 0 10px 24px -10px rgba(0,0,0,.5); }
+.app-id h3 { font-size: clamp(1.8rem, 3.6vw, 2.8rem); font-weight: 800; letter-spacing: -0.035em; line-height: 1.05; }
+.app-id h3 span { font: 700 0.6em/1 var(--arabic); color: var(--c); letter-spacing: 0; margin-inline-start: 8px; }
+.kind { color: var(--muted); font-size: 0.95rem; margin-top: 6px; line-height: 1.4; }
+.desc { font-size: 1.02rem; max-width: 46ch; }
+.feats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 0; padding: 0; list-style: none; }
+.feats li { display: flex; gap: 10px; align-items: flex-start; font-size: 0.92rem; line-height: 1.4; padding: 10px 12px; border-radius: 12px; background: color-mix(in srgb, var(--surface) 75%, transparent); border: 1px solid var(--line); }
+.feats li::before { content: ""; flex: none; width: 8px; height: 8px; margin-top: 6px; border-radius: 3px; background: var(--c); }
+.meta { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.store { display: inline-flex; align-items: center; gap: 6px; font: 600 0.8rem/1 "Instrument Sans", system-ui, sans-serif; padding: 9px 12px; border-radius: 10px; border: 1px solid var(--line); color: var(--ink); text-decoration: none; background: var(--surface); }
+.store:hover { border-color: var(--ink); }
+.store svg { width: 14px; height: 14px; }
+.note { font: 500 0.75rem/1.3 var(--mono); color: var(--muted); }
+.deck { position: relative; z-index: 1; height: min(74vh, 680px); min-height: 0; perspective: 1600px; }
+.card {
+  position: absolute; left: 50%; top: 50%; height: min(60vh, 560px); width: auto; border: 0; padding: 0; background: none;
+  border-radius: 20px; overflow: hidden; cursor: zoom-in; box-shadow: var(--shadow); transform: translate(-50%, -50%); will-change: transform;
+}
+.card img { height: 100%; width: auto; display: block; }
+.card::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.38) 48%, rgba(255,255,255,.08) 56%, transparent 66%); transform: translateX(var(--shine, -130%)); }
+
+/* other sections */
+.block { display: grid; gap: 36px; }
+.caps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.cap { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 24px; display: grid; gap: 10px; align-content: start; transition: transform .3s var(--ease), border-color .3s; }
+.cap:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
+.cap .glyph { width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 12%, var(--surface)); color: var(--accent); }
+.cap .glyph svg { width: 20px; height: 20px; }
+.cap h3 { font-size: 1.12rem; font-weight: 700; }
+.cap p { color: var(--muted); font-size: 0.94rem; }
+.cap .proof { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px; }
+.cap .proof a { display: block; width: 26px; height: 26px; }
+.cap .proof img { width: 100%; height: 100%; border-radius: 7px; display: block; }
+.repo { border: 1px solid var(--line); border-radius: 18px; padding: 28px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px; align-items: center; background: var(--surface); }
+.repo h3 { font: 700 1.2rem/1.2 var(--mono); margin-top: 8px; }
+.repo p { color: var(--muted); font-size: 0.96rem; margin-top: 8px; max-width: 70ch; }
+.jobs { display: grid; border-top: 1px solid var(--line); }
+.job { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 28px; padding-block: 28px; border-bottom: 1px solid var(--line); }
+.job .when { font: 500 0.82rem/1.5 var(--mono); color: var(--muted); }
+:root[lang="ar"] .job .when { font-family: var(--body); font-size: 0.9rem; }
+.job .when b { display: block; color: var(--accent); font-weight: 500; }
+.job h3 { font-size: 1.35rem; font-weight: 700; }
+.job .where { color: var(--muted); margin-top: 2px; }
+.job ul { margin: 14px 0 0; padding-inline-start: 18px; display: grid; gap: 6px; max-width: 72ch; }
+.job .apps { display: flex; gap: 6px; margin-top: 14px; }
+.job .apps img { width: 30px; height: 30px; border-radius: 8px; }
+.skills { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px 36px; }
+.skill { display: grid; gap: 12px; align-content: start; }
+.skill h3 { font: 600 0.98rem/1.3 var(--display); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 500 0.74rem/1 var(--mono); padding: 7px 10px; border-radius: 7px; border: 1px solid var(--line); color: var(--ink); background: var(--surface); }
+.facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.fact { border-top: 2px solid var(--ink); padding-top: 14px; display: grid; gap: 6px; align-content: start; }
+.fact b { font: 600 1.02rem/1.35 var(--display); }
+.fact span { color: var(--muted); font-size: 0.92rem; }
+
+/* contact */
+.contact { background: var(--band); color: var(--band-ink); border-radius: 28px; padding: clamp(28px, 6vw, 64px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 40px; align-items: center; }
+.contact .label { color: var(--gold); }
+.contact h2 { font-size: clamp(2.2rem, 5.4vw, 3.8rem); font-weight: 800; letter-spacing: -0.035em; line-height: 1.05; margin-top: 12px; }
+.contact p { color: var(--band-muted); margin-top: 14px; max-width: 44ch; }
+.links { display: grid; gap: 10px; }
+.link {
+  display: grid; grid-template-columns: 52px minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 12px 14px 12px 12px;
+  border-radius: 18px; border: 1px solid var(--band-line); background: color-mix(in srgb, var(--band-ink) 4%, transparent);
+  color: var(--band-ink); text-decoration: none; transition: transform .3s var(--ease), border-color .3s, background-color .3s;
+}
+a.link:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--brand) 70%, var(--band-line)); background: color-mix(in srgb, var(--brand) 14%, transparent); }
+.link .ico { width: 52px; height: 52px; border-radius: 15px; display: grid; place-items: center; background: var(--brand); color: #fff; box-shadow: 0 10px 24px -12px var(--brand); }
+.link .ico svg { width: 26px; height: 26px; }
+.link .txt { display: grid; gap: 4px; min-width: 0; }
+.link .k { font: 500 0.72rem/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--band-muted); }
+:root[lang="ar"] .link .k { font-family: var(--body); letter-spacing: 0; font-size: 0.8rem; }
+.link .v { font: 600 1.02rem/1.3 "Instrument Sans", system-ui, sans-serif; overflow-wrap: anywhere; direction: ltr; text-align: start; }
+:root[dir="rtl"] .link .v { text-align: right; }
+.link .go { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--band-line); color: var(--band-ink); transition: transform .3s var(--ease); }
+.link .go svg { width: 16px; height: 16px; }
+:root[dir="rtl"] .link .go svg { transform: scaleX(-1); }
+a.link:hover .go { transform: translate(2px, -2px); }
+.copy { width: 36px; height: 36px; display: grid; place-items: center; background: transparent; border: 1px solid var(--band-line); color: var(--band-ink); border-radius: 50%; padding: 0; cursor: pointer; }
+.copy svg { width: 16px; height: 16px; }
+.copy:hover { border-color: var(--gold); }
+footer { color: var(--muted); font-size: 0.85rem; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-bottom: 96px; }
+
+.lb { position: fixed; inset: 0; z-index: 50; background: rgba(5, 8, 14, 0.92); display: grid; place-items: center; padding: 24px; }
+.lb img { max-height: 86vh; max-width: min(92vw, 460px); border-radius: 22px; box-shadow: 0 30px 80px rgba(0,0,0,.6); }
+.lb button { position: absolute; background: rgba(255,255,255,.12); color: #fff; border: 0; width: 46px; height: 46px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; }
+.lb .close { top: calc(16px + env(safe-area-inset-top, 0px)); right: 16px; }
+.lb .prev { left: 16px; top: 50%; transform: translateY(-50%); }
+.lb .next { right: 16px; top: 50%; transform: translateY(-50%); }
+.lb .cap-t { position: absolute; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); left: 0; right: 0; text-align: center; color: #cfd6e4; font: 500 0.8rem/1 var(--mono); }
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .rise { animation: rise linear both; animation-timeline: view(); animation-range: entry 0% entry 55%; }
+    @keyframes rise { from { opacity: 0.2; transform: translateY(40px) scale(.98); } to { opacity: 1; transform: none; } }
+  }
+}
+
+/* large screens: scale the whole page up instead of leaving it small in the middle;
+   keep a gutter for the fixed contact bar on the side */
+@media (min-width: 1321px) {
+  .wrap, .top-in { max-width: min(1180px, calc(100vw - 200px)); }
+}
+@media (min-width: 1440px) {
+  html { font-size: 17.5px; }
+  .wrap, .top-in { max-width: min(1320px, calc(100vw - 200px)); }
+  .deck { height: min(76vh, 740px); }
+  .card { height: min(64vh, 620px); }
+  .orbit { height: 660px; }
+}
+@media (min-width: 1700px) {
+  html { font-size: 18.5px; }
+  .wrap, .top-in { max-width: min(1440px, calc(100vw - 220px)); }
+  .deck { height: min(78vh, 800px); }
+  .card { height: min(66vh, 680px); }
+}
+@media (max-width: 1080px) {
+  .rail { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .rail { gap: 8px; }
+  .pill { padding: 12px 4px 10px; gap: 6px; border-radius: 16px; }
+  .pill img { width: 48px; height: 48px; border-radius: 13px; }
+  .pill b { font-size: 0.74rem; }
+  .pill small { font-size: 0.56rem; letter-spacing: .02em; }
+  :root[lang="ar"] .pill small { font-size: 0.7rem; }
+}
+@media (max-width: 960px) {
+  .hero { grid-template-columns: minmax(0, 1fr); padding-top: 20px; --mx: 50%; }
+  .orbit { height: 440px; margin-inline: -20px; order: -1; margin-bottom: -24px; }
+  .screen { width: 150px; border-radius: 26px; padding: 5px; }
+  .screen-in { border-radius: 21px; }
+  .now { top: calc(50% + 178px); }
+  .planet { width: 50px; height: 50px; margin: -25px 0 0 -25px; border-radius: 13px; }
+  .rail-wrap { margin-top: 0; }
+  .stage { grid-template-columns: minmax(0, 1fr); min-height: 0; gap: 22px; padding-block: 44px; }
+  .deck { height: min(54svh, 470px); perspective: none; }
+  .card { height: min(46svh, 410px); border-radius: 16px; will-change: auto;
+    transform: translate(-50%, -50%) translate(var(--fx, 0px), var(--fy, 0px)) rotate(var(--fr, 0deg)); }
+  .card::after { display: none; }
+  .ghost { display: none; }
+  .info > * { transition: opacity .7s ease, transform .8s var(--ease); }
+  .card { transition: transform 1s cubic-bezier(.2, .8, .2, 1), opacity .6s ease; transition-delay: calc(var(--d, 0) * 90ms + 150ms); }
+  .chapter:not(.in) .info > * { opacity: 0.08; transform: translateY(22px); }
+  .deck:not(.in) .card { opacity: 0.15; transform: translate(-50%, -50%) translate(calc(var(--kk, 0) * 10px), 90px) rotate(calc(var(--kk, 0) * 7deg)) scale(.84); transition-delay: 0s; }
+  .info > :nth-child(2) { transition-delay: .06s; } .info > :nth-child(3) { transition-delay: .12s; }
+  .info > :nth-child(4) { transition-delay: .18s; } .info > :nth-child(5) { transition-delay: .24s; }
+  .feats { display: flex; flex-wrap: wrap; gap: 6px; }
+  .feats li { padding: 6px 10px; font-size: 0.82rem; border-radius: 9px; }
+  .feats li::before { width: 6px; height: 6px; margin-top: 6px; }
+  .info { gap: 12px; }
+  .app-id img { width: 54px; height: 54px; border-radius: 14px; }
+  .caps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .contact { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+  .wrap { gap: 84px; }
+  .top-in { gap: 10px; }
+  .menu-btn { display: grid; }
+  .top nav {
+    position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 2px;
+    padding: 8px 16px 16px; background: var(--bg); border-bottom: 1px solid var(--line); box-shadow: 0 24px 40px -24px rgba(0,0,0,.35);
+    opacity: 0; transform: translateY(-8px); pointer-events: none; transition: opacity .25s, transform .3s var(--ease);
+  }
+  .top.menu-open nav { opacity: 1; transform: none; pointer-events: auto; }
+  .top nav a { font-size: 1.02rem; padding: 14px 14px; border-radius: 12px; }
+  .top nav a.cta { margin: 6px 0 0; text-align: center; }
+  .hero h1 { font-size: 2.6rem; line-height: 0.95; letter-spacing: -0.04em; }
+  :root[lang="ar"] .hero h1 { font-size: 2.4rem; line-height: 1.2; }
+  .alt-name { font-size: 1.2rem; }
+  .alt-name:lang(en) { font-size: 1.05rem; }
+  .role { font-size: 1.05rem; }
+  .lede { font-size: 0.97rem; }
+  .sec-head h2 { font-size: 1.75rem; line-height: 1.12; }
+  .sec-head p { font-size: 0.97rem; }
+  .app-id h3 { font-size: 1.55rem; }
+  .desc { font-size: 0.97rem; }
+  .contact h2 { font-size: 1.9rem; }
+  .cap h3 { font-size: 1.05rem; }
+  .job h3 { font-size: 1.15rem; }
+  .orbit { height: 300px; margin-bottom: -8px; }
+  .screen { width: 112px; border-radius: 20px; padding: 4px; }
+  .screen-in { border-radius: 16px; }
+  .now { top: calc(50% + 132px); font-size: 0.68rem; }
+  .cap { padding: 20px; }
+  .hero-text { gap: 16px; }
+  .planet { width: 40px; height: 40px; margin: -20px 0 0 -20px; border-radius: 11px; }
+  .planet span { display: none; }
+  .caps, .skills, .facts { grid-template-columns: minmax(0, 1fr); }
+  .job { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .repo { grid-template-columns: minmax(0, 1fr); }
+  .dock { gap: 4px; padding: 6px; border-radius: 18px; }
+  .dock a, .dock .up { width: 32px; height: 32px; }
+  .dock a img { border-radius: 9px; }
+  .dock a.active { width: 40px; height: 40px; margin-top: -6px; }
+  .link { grid-template-columns: 44px minmax(0, 1fr) auto; gap: 12px; padding: 10px; }
+  .link .ico { width: 44px; height: 44px; border-radius: 13px; }
+  .link .ico svg { width: 22px; height: 22px; }
+  .link .v { font-size: 0.9rem; }
+  .link .v#email { overflow-wrap: anywhere; font-size: 0.8rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  body { transition: none; }
+  .dock, .dock a, .pill, .cap, .btn, .link, .lang .knob { transition: none; }
+}
+</style>
+</head>
+<body>
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="ld-stage">
+    <svg class="ld-ring" viewBox="0 0 300 300"><circle cx="150" cy="150" r="146" class="ld-track"/><circle cx="150" cy="150" r="146" class="ld-bar" id="ld-bar"/></svg>
+    <div class="ld-orbit" id="ld-orbit"><img src="img/hazzoura-icon.jpg" alt="" style="--k:0"><img src="img/sela-icon.jpg" alt="" style="--k:1"><img src="img/hajj-icon.jpg" alt="" style="--k:2"><img src="img/fhe-icon.jpg" alt="" style="--k:3"><img src="img/ansaby-icon.jpg" alt="" style="--k:4"><img src="img/slots-icon.jpg" alt="" style="--k:5"><img src="img/square-icon.jpg" alt="" style="--k:6"><img src="img/melocanna-icon.jpg" alt="" style="--k:7"></div>
+    <div class="ld-core"><b id="ld-num">0</b><span id="ld-txt">Loading the apps</span></div>
+  </div>
+  <div class="ld-mark">eslam<span>.</span>negm</div>
+</div>
+<script>
+(function () {
+  var html = document.documentElement, L = document.getElementById("loader");
+  html.classList.add("is-loading");
+  try { if (localStorage.getItem("lang") === "ar") document.getElementById("ld-txt").textContent = "جارٍ تحميل التطبيقات"; } catch (e) {}
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var num = document.getElementById("ld-num"), bar = document.getElementById("ld-bar");
+  var C = 2 * Math.PI * 146, target = 0, shown = 0, t0 = performance.now(), finished = false;
+  bar.style.strokeDasharray = C; bar.style.strokeDashoffset = C;
+  Array.prototype.forEach.call(L.querySelectorAll(".ld-orbit img"), function (im) {
+    if (im.complete) im.classList.add("ok"); else { im.addEventListener("load", function () { im.classList.add("ok"); }); im.addEventListener("error", function () { im.classList.add("ok"); }); }
+  });
+  function tick() {
+    shown += (target - shown) * 0.12;
+    if (target - shown < 0.4) shown = target;
+    num.textContent = Math.round(shown);
+    bar.style.strokeDashoffset = C * (1 - shown / 100);
+    if (shown >= 100 && performance.now() - t0 > 900) return finish();
+    requestAnimationFrame(tick);
+  }
+  function finish() {
+    if (finished) return; finished = true;
+    num.textContent = "100"; bar.style.strokeDashoffset = 0;
+    L.classList.add("done");
+    setTimeout(function () {
+      L.classList.add("out");
+      setTimeout(function () { html.classList.remove("is-loading"); }, reduce ? 0 : 260);
+      setTimeout(function () { L.remove(); }, reduce ? 300 : 900);
+    }, reduce ? 0 : 520);
+  }
+  function track() {
+    var imgs = Array.prototype.filter.call(document.images, function (im) { return im.loading !== "lazy" && !L.contains(im); });
+    var total = imgs.length + 1, done = 0;
+    function bump() { done++; target = Math.min(100, Math.round(done / total * 100)); }
+    imgs.forEach(function (im) {
+      if (im.complete) bump(); else { im.addEventListener("load", bump, { once: true }); im.addEventListener("error", bump, { once: true }); }
+    });
+    (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(bump);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", track); else track();
+  setTimeout(function () { target = 100; }, 4000);
+  requestAnimationFrame(tick);
+})();
+</script>
+<header class="top">
+  <div class="top-in">
+    <a class="mark" href="#top">eslam<span>.</span>negm</a>
+    <nav aria-label="Sections" id="nav">
+      <a href="#work" data-sec="work" data-t="nav.work">Work</a>
+      <a href="#capabilities" data-sec="capabilities" data-t="nav.caps">What I do</a>
+      <a href="#experience" data-sec="experience" data-t="nav.exp">Experience</a>
+      <a href="#skills" data-sec="skills" data-t="nav.skills">Skills</a>
+      <a href="#contact" data-sec="contact" class="cta" data-t="nav.contact">Contact</a>
+    </nav>
+    <div class="lang" id="lang" role="group" aria-label="Language">
+      <span class="knob" aria-hidden="true"></span>
+      <button type="button" lang="en" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" lang="ar" data-lang="ar" aria-pressed="false">ع</button>
+    </div>
+    <button class="menu-btn" type="button" id="menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="nav">
+      <svg class="bars" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+      <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+  <div class="progress" id="progress"></div>
+</header>
+
+<div class="wrap" id="top">
+  <section class="hero" id="hero" aria-label="Introduction">
+    <div class="glow" id="glow" aria-hidden="true"></div>
+    <div class="hero-text intro" id="intro">
+      <div class="hello"><button class="me-btn" type="button" aria-label="View photo"><img class="me" src="img/me.jpg" alt="Eslam Negm" width="68" height="68"></button><span class="avail"><span class="dot" aria-hidden="true"></span><span data-t="avail">Open to new Flutter projects</span></span></div>
+      <div class="alt-name" id="alt-name" lang="ar" dir="rtl">إسلام نجم</div>
+      <h1 id="name"><span class="w">Eslam</span> <span class="w">Negm</span></h1>
+      <p class="role" data-t="role">Mobile Application Developer <b>· Flutter &amp; Dart</b></p>
+      <p class="lede" data-t="lede">I build scalable, high-performance apps for iOS and Android, turning complex business requirements into smooth products people enjoy using. Clean Architecture keeps every codebase easy to grow, and I take an app from the first screen to the store release. I have shipped games, e-commerce, booking, social, event and enterprise apps, and I can build whatever your product needs.</p>
+      <div class="actions">
+        <a class="btn primary" href="#work" data-t="see">See the apps</a>
+        <a class="btn" href="https://www.linkedin.com/in/eslam-negm-37b03b3b8/"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5zM3 9.75h4V21H3zM9.5 9.75h3.8v1.6h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1V21h-4v-4.9c0-1.17-.02-2.68-1.63-2.68-1.64 0-1.89 1.28-1.89 2.6V21h-4z"/></svg>LinkedIn</a>
+        <a class="btn" href="https://github.com/eslamnegm010"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>GitHub</a>
+      </div>
+    </div>
+    <div class="orbit" id="orbit">
+      <div class="orbit-in" id="orbit-in">
+        <div class="ring" id="ring1"></div>
+        <div class="ring" id="ring2"></div>
+        <div class="screen" aria-hidden="true"><div class="screen-in" id="screen"></div></div>
+        <div class="now"><i></i><span data-t="orbiting">Now orbiting</span> <b id="now-name">Hazzoura</b></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rail-wrap" id="rail-wrap">
+    <div class="label" data-t="rail">8 apps live on the App Store and Google Play</div>
+    <nav class="rail" id="rail" aria-label="Jump to an app"></nav>
+  </div>
+
+  <section id="work" aria-label="Selected work">
+    <div class="sec-head rise">
+      <div class="label" data-t="work.label">Selected work</div>
+      <h2 data-t="work.title">Scroll through the apps I've shipped</h2>
+      <p data-t="work.sub">Production apps for enterprises, government events, games and commerce, live on the App Store and Google Play.</p>
+    </div>
+    <div id="chapters"></div>
+  </section>
+
+  <section id="capabilities" class="block">
+    <div class="sec-head rise">
+      <div class="label" data-t="caps.label">What I do</div>
+      <h2 data-t="caps.title">From the first screen to the store release</h2>
+      <p data-t="caps.sub">What I bring to a team, and the apps where you can see it.</p>
+    </div>
+    <div class="caps" id="caps"></div>
+  </section>
+
+  <section class="block" aria-label="Open source">
+    <article class="repo rise">
+      <div>
+        <div class="label" data-t="oss.label">Open source · Flutter app</div>
+        <h3>reminder_App</h3>
+        <p data-t="oss.desc">Time and location based reminders with Flutter Map, Geolocator and local notifications. Fully offline with Hive and SharedPreferences, complete EN/AR localization and adaptive RTL layouts. Clean Architecture, feature-first, Cubit.</p>
+      </div>
+      <a class="btn" href="https://github.com/eslamnegm010/reminder_App" data-t="oss.btn">View on GitHub</a>
+    </article>
+  </section>
+
+  <section id="experience" class="block">
+    <div class="sec-head rise">
+      <div class="label" data-t="exp.label">Experience</div>
+      <h2 data-t="exp.title">Where I've worked</h2>
+    </div>
+    <div class="jobs">
+      <div class="job rise">
+        <div class="when" data-t="job1.when"><b>Current</b>Dec 2024 – Present</div>
+        <div>
+          <h3 data-t="job1.title">Mobile Developer · Spark Systems</h3>
+          <div class="where" data-t="job1.where">Sheikh Zayed, Giza</div>
+          <ul data-t="job1.list">
+            <li>Build and maintain SELA Super App, Hajj Expo and the Falcon &amp; Hunting Exhibition app for Saudi enterprise and government-backed clients.</li>
+            <li>Apply Clean Architecture, SOLID, AES/RSA encryption and native-level data protection to keep the apps secure and scalable.</li>
+            <li>Speed up releases with Azure Pipelines, Fastlane and Shorebird code push, working closely with product and design.</li>
+          </ul>
+          <div class="apps"><img src="img/sela-icon.jpg" alt="SELA Super App"><img src="img/hajj-icon.jpg" alt="Hajj Expo"><img src="img/fhe-icon.jpg" alt="Falcon &amp; Hunting Exhibition"></div>
+        </div>
+      </div>
+      <div class="job rise">
+        <div class="when" data-t="job2.when">Oct 2023 – Dec 2023</div>
+        <div>
+          <h3 data-t="job2.title">Flutter Developer Intern · Instant Software Solutions</h3>
+          <div class="where" data-t="job2.where">Dokki, Giza · Hybrid</div>
+          <ul data-t="job2.list"><li>Flutter development, API integration, UI implementation and bug fixing.</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="block">
+    <div class="sec-head rise">
+      <div class="label" data-t="skills.label">Toolbox</div>
+      <h2 data-t="skills.title">What I work with</h2>
+    </div>
+    <div class="skills" id="skill-list"></div>
+  </section>
+
+  <section aria-label="Education and languages">
+    <div class="facts">
+      <div class="fact rise"><div class="label" data-t="f1.k">Education</div><b data-t="f1.b">Computer Science &amp; Information Systems</b><span data-t="f1.s">Higher Institute for Computer Science, New Cairo · 2019 – 2023</span></div>
+      <div class="fact rise"><div class="label" data-t="f2.k">Languages</div><b data-t="f2.b">Arabic, native</b><span data-t="f2.s">English, intermediate</span></div>
+      <div class="fact rise"><div class="label" data-t="f3.k">Based in</div><b data-t="f3.b">Cairo, Egypt</b><span data-t="f3.s">Remote or on-site</span></div>
+    </div>
+  </section>
+
+  <section class="contact rise" id="contact">
+    <div>
+      <div class="contact-me"><button class="me-btn" type="button" aria-label="View photo"><img src="img/me.jpg" alt="Eslam Negm" loading="lazy"></button><div class="label" data-t="c.label">Contact</div></div>
+      <h2 data-t="c.title">Have a Flutter app to build?</h2>
+      <p data-t="c.sub">Send me a short note about the product and the timeline.</p>
+    </div>
+    <div class="links">
+      <div class="link" style="--brand: #e2574c">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="3"/><path d="m3.5 7 8.5 6 8.5-6"/></svg></span>
+        <span class="txt"><span class="k" data-t="c.email">Email</span><span class="v" id="email">eslamnegm010@gmail.com</span></span>
+        <button class="copy" type="button" id="copy-email" aria-label="Copy email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button>
+      </div>
+      <a class="link" style="--brand: #25d366" href="https://wa.me/201061179829">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></span>
+        <span class="txt"><span class="k" data-t="c.wa">WhatsApp</span><span class="v">+20 106 117 9829</span></span>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </a>
+      <a class="link" style="--brand: #0a66c2" href="https://www.linkedin.com/in/eslam-negm-37b03b3b8/">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5zM3 9.75h4V21H3zM9.5 9.75h3.8v1.6h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1V21h-4v-4.9c0-1.17-.02-2.68-1.63-2.68-1.64 0-1.89 1.28-1.89 2.6V21h-4z"/></svg></span>
+        <span class="txt"><span class="k">LinkedIn</span><span class="v">Eslam Negm</span></span>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </a>
+      <a class="link" style="--brand: #24292f" href="https://github.com/eslamnegm010">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg></span>
+        <span class="txt"><span class="k">GitHub</span><span class="v">@eslamnegm010</span></span>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </a>
+      <a class="link" style="--brand: #1877f2" href="https://www.facebook.com/eSlam.neGm.Em">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg></span>
+        <span class="txt"><span class="k" data-t="c.fb">Facebook</span><span class="v">Eslam Negm</span></span>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </a>
+    </div>
+  </section>
+
+  <footer><span data-t="foot.a">© 2026 Eslam Negm</span><span data-t="foot.b">Flutter · Dart · Cairo</span></footer>
+</div>
+
+<nav class="dock" id="dock" aria-label="Apps"></nav>
+
+<aside class="side" id="side" aria-label="Contact">
+  <a class="s-btn" style="--brand: #25d366; --i: 0; --x: 0px; --y: -140px" href="https://wa.me/201061179829" data-tip="+20 106 117 9829" aria-label="WhatsApp +20 106 117 9829"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+  <a class="s-btn" style="--brand: #0a66c2; --i: 1; --x: 54px; --y: -129px" href="https://www.linkedin.com/in/eslam-negm-37b03b3b8/" data-tip="LinkedIn" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5zM3 9.75h4V21H3zM9.5 9.75h3.8v1.6h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1V21h-4v-4.9c0-1.17-.02-2.68-1.63-2.68-1.64 0-1.89 1.28-1.89 2.6V21h-4z"/></svg></a>
+  <a class="s-btn gh" style="--brand: var(--ink); --i: 2; --x: 99px; --y: -99px" href="https://github.com/eslamnegm010" data-tip="GitHub" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg></a>
+  <a class="s-btn" style="--brand: #1877f2; --i: 3; --x: 129px; --y: -54px" href="https://www.facebook.com/eSlam.neGm.Em" data-tip="Facebook" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg></a>
+  <button class="s-btn" style="--brand: #e2574c; --i: 4; --x: 140px; --y: 0px" type="button" id="side-email" data-tip="eslamnegm010@gmail.com" aria-label="Copy email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="3"/><path d="m3.5 7 8.5 6 8.5-6"/></svg></button>
+  <button class="s-fab" type="button" id="side-fab" aria-expanded="false" aria-label="Contact">
+    <span class="fab-icons" id="fab-icons" aria-hidden="true"></span>
+    <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+  </button>
+  <span class="s-hint" id="s-hint" aria-hidden="true">Let's talk</span>
+</aside>
+<div class="toast" id="toast" role="status" hidden></div>
+<div class="sheet-ov" id="sheet-ov"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sh-title">
+  <div class="grab" aria-hidden="true"></div>
+  <div class="sh-head"><img id="sh-icon" src="img/hazzoura-icon.jpg" alt=""><div><h3 id="sh-title">Hazzoura</h3><span id="sh-kind"></span></div></div>
+  <div class="sh-actions">
+    <button class="sh-btn primary" type="button" id="sh-see"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg><span id="sh-see-t">See it on this page</span></button>
+    <a class="sh-btn" id="sh-as" href="#"></a>
+    <a class="sh-btn" id="sh-gp" href="#"></a>
+  </div>
+</div>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Screenshot">
+  <img id="lb-img" alt="">
+  <button class="close" type="button" id="lb-close" aria-label="Close">✕</button>
+  <button class="prev" type="button" id="lb-prev" aria-label="Previous">‹</button>
+  <button class="next" type="button" id="lb-next" aria-label="Next">›</button>
+  <div class="cap-t" id="lb-cap"></div>
+</div>
+
+<script>
+var T = {
+  en: {
+    "nav.work": "Work", "nav.caps": "What I do", "nav.exp": "Experience", "nav.skills": "Skills", "nav.contact": "Contact",
+    avail: "Open to new Flutter projects",
+    role: "Mobile Application Developer <b>· Flutter &amp; Dart</b>",
+    lede: "I build scalable, high-performance apps for iOS and Android, turning complex business requirements into smooth products people enjoy using. Clean Architecture keeps every codebase easy to grow, and I take an app from the first screen to the store release. I have shipped games, e-commerce, booking, social, event and enterprise apps, and I can build whatever your product needs.",
+    see: "See the apps", orbiting: "Now orbiting", sheetSee: "See it on this page",
+    rail: "8 apps live on the App Store and Google Play",
+    "work.label": "Selected work", "work.title": "Scroll through the apps I've shipped",
+    "work.sub": "Production apps for enterprises, government events, games and commerce, live on the App Store and Google Play.",
+    "caps.label": "What I do", "caps.title": "From the first screen to the store release", "caps.sub": "What I bring to a team, and the apps where you can see it.",
+    "oss.label": "Open source · Flutter app",
+    "oss.desc": "Time and location based reminders with Flutter Map, Geolocator and local notifications. Fully offline with Hive and SharedPreferences, complete EN/AR localization and adaptive RTL layouts. Clean Architecture, feature-first, Cubit.",
+    "oss.btn": "View on GitHub",
+    "exp.label": "Experience", "exp.title": "Where I've worked",
+    "job1.when": "<b>Current</b>Dec 2024 – Present", "job1.title": "Mobile Developer · Spark Systems", "job1.where": "Sheikh Zayed, Giza",
+    "job1.list": "<li>Build and maintain SELA Super App, Hajj Expo and the Falcon &amp; Hunting Exhibition app for Saudi enterprise and government-backed clients.</li><li>Apply Clean Architecture, SOLID, AES/RSA encryption and native-level data protection to keep the apps secure and scalable.</li><li>Speed up releases with Azure Pipelines, Fastlane and Shorebird code push, working closely with product and design.</li>",
+    "job2.when": "Oct 2023 – Dec 2023", "job2.title": "Flutter Developer Intern · Instant Software Solutions", "job2.where": "Dokki, Giza · Hybrid",
+    "job2.list": "<li>Flutter development, API integration, UI implementation and bug fixing.</li>",
+    "skills.label": "Toolbox", "skills.title": "What I work with",
+    "f1.k": "Education", "f1.b": "Computer Science &amp; Information Systems", "f1.s": "Higher Institute for Computer Science, New Cairo · 2019 – 2023",
+    "f2.k": "Languages", "f2.b": "Arabic, native", "f2.s": "English, intermediate",
+    "f3.k": "Based in", "f3.b": "Cairo, Egypt", "f3.s": "Remote or on-site",
+    "c.label": "Contact", "c.title": "Have a Flutter app to build?", "c.sub": "Send me a short note about the product and the timeline.",
+    "c.email": "Email", hint: "Let's talk", "c.wa": "WhatsApp", "c.fb": "Facebook", "c.copy": "Copy", emailCopied: "Email copied: eslamnegm010@gmail.com", emailIs: "Email: eslamnegm010@gmail.com", sideCopy: "Copy email", sideOpen: "Contact", copied: "Copied", pressCopy: "Press Ctrl+C",
+    "foot.a": "© 2026 Eslam Negm", "foot.b": "Flutter · Dart · Cairo",
+    top: "Top", screen: "screen", name: ["Eslam", "Negm"], alt: "إسلام نجم"
+  },
+  ar: {
+    "nav.work": "الأعمال", "nav.caps": "ماذا أقدّم", "nav.exp": "الخبرة", "nav.skills": "المهارات", "nav.contact": "تواصل",
+    avail: "متاح لمشاريع Flutter جديدة",
+    role: "مطوّر تطبيقات جوال <b>· Flutter و Dart</b>",
+    lede: "أبني تطبيقات iOS وAndroid قابلة للتوسّع وعالية الأداء، وأحوّل متطلبات الأعمال المعقّدة إلى منتجات سلسة يستمتع الناس باستخدامها. أعتمد Clean Architecture ليبقى كل مشروع سهل التطوير، وأتولّى التطبيق من أول شاشة حتى النشر على المتجر. أطلقت ألعابًا ومتاجر إلكترونية وتطبيقات حجز وتواصل وفعاليات وشركات، وأستطيع بناء ما يحتاجه منتجك.",
+    see: "شاهد التطبيقات", orbiting: "يدور الآن", sheetSee: "شاهده في هذه الصفحة",
+    rail: "8 تطبيقات منشورة على App Store و Google Play",
+    "work.label": "أعمال مختارة", "work.title": "تصفّح التطبيقات التي أطلقتها",
+    "work.sub": "تطبيقات منشورة لشركات وفعاليات حكومية وألعاب ومتاجر إلكترونية، ومتاحة على App Store و Google Play.",
+    "caps.label": "ماذا أقدّم", "caps.title": "من أول شاشة حتى النشر على المتجر", "caps.sub": "ما أضيفه للفريق، والتطبيقات التي تشهد عليه.",
+    "oss.label": "مفتوح المصدر · تطبيق Flutter",
+    "oss.desc": "تذكيرات بالوقت والموقع باستخدام Flutter Map وGeolocator والإشعارات المحلية. يعمل بالكامل بدون إنترنت عبر Hive وSharedPreferences، مع ترجمة كاملة للعربية والإنجليزية وواجهات تتكيّف مع اتجاه الكتابة. Clean Architecture وتقسيم حسب الميزات وCubit.",
+    "oss.btn": "عرض على GitHub",
+    "exp.label": "الخبرة", "exp.title": "أين عملت",
+    "job1.when": "<b>حاليًا</b>ديسمبر 2024 – الآن", "job1.title": "مطوّر تطبيقات جوال · Spark Systems", "job1.where": "الشيخ زايد، الجيزة",
+    "job1.list": "<li>أطوّر وأصون تطبيقات SELA Super App وHajj Expo ومعرض الصقور والصيد لعملاء سعوديين من الشركات والجهات الحكومية.</li><li>أطبّق Clean Architecture وSOLID وتشفير AES/RSA وحماية البيانات على مستوى النظام لتبقى التطبيقات آمنة وقابلة للتوسّع.</li><li>أسرّع الإصدارات عبر Azure Pipelines وFastlane وتحديثات Shorebird الفورية، بالتعاون مع فرق المنتج والتصميم.</li>",
+    "job2.when": "أكتوبر 2023 – ديسمبر 2023", "job2.title": "متدرّب مطوّر Flutter · Instant Software Solutions", "job2.where": "الدقي، الجيزة · هجين",
+    "job2.list": "<li>تطوير تطبيقات Flutter وربط الـ APIs وبناء الواجهات وإصلاح الأخطاء.</li>",
+    "skills.label": "الأدوات", "skills.title": "ما أعمل به",
+    "f1.k": "التعليم", "f1.b": "علوم الحاسب ونظم المعلومات", "f1.s": "المعهد العالي لعلوم الحاسب، القاهرة الجديدة · 2019 – 2023",
+    "f2.k": "اللغات", "f2.b": "العربية: اللغة الأم", "f2.s": "الإنجليزية: مستوى متوسط",
+    "f3.k": "المقر", "f3.b": "القاهرة، مصر", "f3.s": "عن بُعد أو من المكتب",
+    "c.label": "تواصل", "c.title": "لديك تطبيق Flutter تريد بناءه؟", "c.sub": "أرسل لي نبذة قصيرة عن المنتج والجدول الزمني.",
+    "c.email": "البريد الإلكتروني", hint: "تواصل معي", "c.wa": "واتساب", "c.fb": "فيسبوك", "c.copy": "نسخ", emailCopied: "تم نسخ البريد: eslamnegm010@gmail.com", emailIs: "البريد: eslamnegm010@gmail.com", sideCopy: "نسخ البريد", sideOpen: "تواصل", copied: "تم النسخ", pressCopy: "اضغط Ctrl+C",
+    "foot.a": "© 2026 إسلام نجم", "foot.b": "Flutter · Dart · القاهرة",
+    top: "للأعلى", screen: "شاشة", name: ["إسلام", "نجم"], alt: "Eslam Negm"
+  }
+};
+
+var AS = "https://apps.apple.com/sa/app/";
+var GP = "https://play.google.com/store/apps/details?id=";
+var APPS = [
+  { id: "hazzoura", name: "Hazzoura", ar: "حزّورة", c: "#c9a45c", as: AS + "id6792533203", gp: GP + "com.aty.hazzoura",
+    en: { tag: "Game", kind: "Social trivia game for the Saudi, UAE and Kuwait majlis · solo build",
+      desc: "A party game with a luxury feel. I built the app, the Flutter Web admin panel and the Firebase backend on my own.",
+      feats: ["Daily challenge: 5 new questions", "Online rooms with a room code", "Offline pass-and-play", "Tournaments and friends", "Admin panel in Flutter Web", "Purchases verified on Cloud Functions"] },
+    arT: { tag: "لعبة", kind: "لعبة معلومات اجتماعية لمجالس السعودية والإمارات والكويت · بنيتها بمفردي",
+      desc: "لعبة جماعية بطابع فاخر. بنيت التطبيق ولوحة التحكم على Flutter Web والخلفية على Firebase بنفسي.",
+      feats: ["تحدٍّ يومي: 5 أسئلة جديدة", "غرف أونلاين برمز دخول", "لعب جماعي على جهاز واحد بدون إنترنت", "بطولات وأصدقاء", "لوحة تحكم على Flutter Web", "مشتريات يتم التحقق منها على Cloud Functions"] } },
+  { id: "sela", name: "SELA Super App", short: "SELA", c: "#e8c500", as: AS + "id6504908987", gp: GP + "sa.sela.superapp",
+    en: { tag: "Enterprise", kind: "Employee super app for Sela, a leading Saudi company", note: "4.8 ★ · 36 ratings",
+      desc: "One app for an employee's whole workday on iPhone and iPad, behind admin-approved access.",
+      feats: ["SELA AI assistant", "SELA Academy courses", "HR services and reports", "Flights, hotels and restaurants", "Social feed with stories", "AES/RSA encryption"] },
+    arT: { tag: "شركات", kind: "تطبيق شامل لموظفي سلا، إحدى الشركات السعودية الرائدة", note: "4.8 ★ · 36 تقييمًا",
+      desc: "تطبيق واحد ليوم الموظف كاملًا على iPhone وiPad، بدخول يعتمده المسؤول.",
+      feats: ["مساعد SELA AI", "دورات SELA Academy", "خدمات وتقارير الموارد البشرية", "حجز الطيران والفنادق والمطاعم", "موجز اجتماعي مع القصص", "تشفير AES/RSA"] } },
+  { id: "hajj", name: "Hajj Expo", c: "#6a5fa0", as: AS + "id6753938620", gp: GP + "sa.sela.HajjExpo",
+    en: { tag: "Event", kind: "Official app of the Hajj Conference & Exhibition", note: "Published by the Ministry of Hajj and Umrah",
+      desc: "The event companion for officials and companies from 95+ countries: a digital entry badge, the full agenda, an interactive venue map and a VR tour of the exhibition.",
+      feats: ["Digital e-badge with QR code", "Interactive venue map", "Agenda and personal calendar", "VR experience", "Exhibitors and speakers", "Arabic and English"] },
+    arT: { tag: "فعالية", kind: "التطبيق الرسمي لمؤتمر ومعرض الحج", note: "الناشر: وزارة الحج والعمرة",
+      desc: "رفيق الفعالية للمسؤولين والشركات من أكثر من 95 دولة: بطاقة دخول رقمية، والبرنامج كاملًا، وخريطة تفاعلية للمعرض، وجولة بالواقع الافتراضي.",
+      feats: ["بطاقة دخول رقمية برمز QR", "خريطة تفاعلية للمعرض", "البرنامج وتقويم شخصي", "تجربة واقع افتراضي", "العارضون والمتحدثون", "بالعربية والإنجليزية"] } },
+  { id: "fhe", name: "Falcon & Hunting Exhibition", short: "FHE", c: "#2f6f93", as: AS + "id6751438319", gp: GP + "sa.sela.falconexpo",
+    en: { tag: "Event", kind: "Official app of the Saudi International Falcons and Hunting Exhibition",
+      desc: "The official guide to one of Saudi Arabia's largest cultural events: discover exhibitors, speakers and workshops, get your tickets and plan your visit on the floor plan.",
+      feats: ["Exhibitor search and filters", "Speakers and workshops", "Tickets in the app", "Floor plan", "Favorites and notifications", "Arabic and English"] },
+    arT: { tag: "فعالية", kind: "التطبيق الرسمي لمعرض الصقور والصيد السعودي الدولي",
+      desc: "الدليل الرسمي لواحد من أكبر الأحداث الثقافية في السعودية: اكتشف العارضين والمتحدثين وورش العمل، واحصل على تذاكرك، وخطّط لزيارتك عبر مخطط المعرض.",
+      feats: ["بحث وفلترة العارضين", "المتحدثون وورش العمل", "التذاكر داخل التطبيق", "مخطط المعرض", "المفضلة والإشعارات", "بالعربية والإنجليزية"] } },
+  { id: "ansaby", name: "Ansaby", ar: "أنسابي", c: "#2f7d4a", as: AS + "id6762079478", gp: GP + "com.sahers.ansabyApp",
+    en: { tag: "Social", kind: "Family tree and family social network",
+      desc: "Build your family tree, invite relatives and keep in touch, with Arabic, English and dark mode.",
+      feats: ["Interactive tree, 2 rendering engines", "Tree completeness score", "Invite relatives by code", "Chat with voice messages", "Baloot table and puzzle race", "PNG and PDF tree export"] },
+    arT: { tag: "اجتماعي", kind: "شجرة عائلة وشبكة اجتماعية للعائلة",
+      desc: "ابنِ شجرة عائلتك وادعُ أقاربك وابقَ على تواصل، بالعربية والإنجليزية مع الوضع الليلي.",
+      feats: ["شجرة تفاعلية بمحرّكَي عرض", "نسبة اكتمال الشجرة", "دعوة الأقارب برمز", "دردشة برسائل صوتية", "طاولة بلوت وسباق ألغاز", "تصدير الشجرة PNG وPDF"] } },
+  { id: "slots", name: "Slots", c: "#3d6b55", as: AS + "id6469031888",
+    en: { tag: "Booking", kind: "Beauty, spa and grooming booking",
+      desc: "Book salons, spas and barbers near you, for men and women, with real-time availability.",
+      feats: ["Vendors near your location", "Spa, salon, barber categories", "Instant booking", "Pay ahead to hold the slot", "Cashback and offers", "Search and filters"] },
+    arT: { tag: "حجوزات", kind: "حجز خدمات التجميل والسبا والحلاقة",
+      desc: "احجز الصالونات والسبا والحلاقين بالقرب منك، للرجال والنساء، مع معرفة المواعيد المتاحة لحظيًا.",
+      feats: ["مزوّدون بالقرب من موقعك", "أقسام السبا والصالون والحلاقة", "حجز فوري", "الدفع المسبق لتثبيت الموعد", "استرداد نقدي وعروض", "بحث وفلاتر"] } },
+  { id: "square", name: "Square", ar: "سكوير", c: "#22a9c8", as: AS + "id1626286616",
+    en: { tag: "Grocery", kind: "Grocery and household shopping",
+      desc: "Everything for the home in one app, with a built-in wallet for fast checkout.",
+      feats: ["Square wallet", "Fast product search", "Category explorer", "Cashback offers"] },
+    arT: { tag: "بقالة", kind: "تسوّق البقالة والمستلزمات المنزلية",
+      desc: "كل احتياجات البيت في تطبيق واحد، مع محفظة مدمجة لدفع أسرع.",
+      feats: ["محفظة سكوير", "بحث سريع عن المنتجات", "استكشاف الأقسام", "عروض استرداد نقدي"] } },
+  { id: "melocanna", name: "Melocanna", c: "#a8743a", as: AS + "id6502879449",
+    en: { tag: "Furniture", kind: "Handcrafted rattan and bamboo furniture",
+      desc: "An editorial shopping experience for premium natural furniture.",
+      feats: ["Categories: decor, tables, mirrors", "Full product catalogue", "Lifestyle photography", "Secure checkout"] },
+    arT: { tag: "أثاث", kind: "أثاث يدوي الصنع من الروطان والخيزران",
+      desc: "تجربة تسوّق أنيقة لأثاث طبيعي فاخر.",
+      feats: ["أقسام: ديكور، طاولات، مرايا", "كتالوج منتجات كامل", "تصوير بأسلوب حياتي", "دفع آمن"] } }
+];
+var CAPS = [
+  { apps: ["sela", "hajj", "ansaby"], icon: '<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/>',
+    en: ["Production Flutter apps", "iOS, Android and Web from one codebase, with Clean Architecture, SOLID and BLoC so the app stays easy to change."],
+    ar: ["تطبيقات Flutter جاهزة للإنتاج", "iOS وAndroid والويب من كود واحد، مع Clean Architecture وSOLID وBLoC ليبقى التطبيق سهل التطوير."] },
+  { apps: ["hazzoura", "hajj", "square"], icon: '<path d="M4 5h16M4 12h10M4 19h16"/><path d="M18 9l3 3-3 3"/>',
+    en: ["Arabic and English, RTL first", "Full localization, mirrored layouts and Arabic typography that feels native to Arabic speakers."],
+    ar: ["العربية والإنجليزية، واليمين لليسار أولًا", "ترجمة كاملة وواجهات معكوسة وخطوط عربية تبدو طبيعية للمستخدم العربي."] },
+  { apps: ["hazzoura"], icon: '<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>',
+    en: ["Admin dashboards in Flutter Web", "Content and operations dashboards that share code with the app, so the business runs without a release."],
+    ar: ["لوحات تحكم على Flutter Web", "لوحات للمحتوى والتشغيل تشارك الكود مع التطبيق، فيُدار العمل دون انتظار إصدار جديد."] },
+  { apps: ["hazzoura", "ansaby"], icon: '<path d="M12 2l3 7h7l-5.5 4.5 2 7.5L12 16.5 5.5 21l2-7.5L2 9h7z"/>',
+    en: ["Real-time and multiplayer", "Live rooms and scoring, chat with voice messages, stories and turn-based games on Firestore."],
+    ar: ["الوقت الفعلي واللعب الجماعي", "غرف مباشرة ونقاط لحظية، دردشة برسائل صوتية، قصص، وألعاب بالأدوار على Firestore."] },
+  { apps: ["sela", "hajj", "fhe"], icon: '<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+    en: ["Security for enterprise clients", "AES/RSA encryption, secure storage, App Check and native-level data protection."],
+    ar: ["أمان لعملاء الشركات", "تشفير AES/RSA، تخزين آمن، App Check، وحماية للبيانات على مستوى النظام."] },
+  { apps: ["hazzoura"], icon: '<path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>',
+    en: ["Monetization", "AdMob with Meta mediation, RevenueCat subscriptions, in-app purchases and server-verified wallets."],
+    ar: ["تحقيق الدخل", "AdMob مع وساطة Meta، اشتراكات RevenueCat، مشتريات داخل التطبيق، ومحافظ يتم التحقق منها على الخادم."] },
+  { apps: ["sela", "hajj", "fhe"], icon: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+    en: ["Release engineering", "CI/CD with Azure Pipelines and Fastlane, and Shorebird code push for fixes without a store review."],
+    ar: ["هندسة الإصدارات", "CI/CD عبر Azure Pipelines وFastlane، وتحديثات فورية عبر Shorebird دون انتظار مراجعة المتجر."] },
+  { apps: ["sela"], icon: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>',
+    en: ["Performance and app size", "Memory profiling, smooth long lists, lazy loading and app size reduction with DevTools."],
+    ar: ["الأداء وحجم التطبيق", "تحليل الذاكرة، قوائم طويلة سلسة، تحميل عند الحاجة، وتقليل حجم التطبيق باستخدام DevTools."] },
+  { apps: [], icon: '<path d="M9 3h6l1 4H8z"/><rect x="4" y="7" width="16" height="14" rx="2"/><path d="M9 13h6"/>',
+    en: ["AI-assisted development", "Claude, Gemini CLI and GitHub Copilot with custom roles and structured prompts, every line reviewed."],
+    ar: ["التطوير بمساعدة الذكاء الاصطناعي", "Claude وGemini CLI وGitHub Copilot بأدوار مخصّصة وأوامر منظّمة، مع مراجعة كل سطر."] }
+];
+var SKILLS = [
+  [["Languages & frameworks", "اللغات والأطر"], ["Dart", "Flutter iOS", "Flutter Android", "Flutter Web", "OOP"]],
+  [["Architecture", "المعمارية"], ["Clean Architecture", "MVVM", "SOLID", "Feature-first", "Melos monorepo"]],
+  [["State & DI", "إدارة الحالة وحقن الاعتماديات"], ["BLoC / Cubit", "Provider", "GetX", "Streams", "ValueNotifier", "GetIt", "Injectable"]],
+  [["Networking", "الشبكات"], ["REST", "Dio", "Retrofit", "WebSockets", "JSON serialization", "Postman"]],
+  [["Firebase", "Firebase"], ["Auth", "Firestore", "Realtime DB", "Storage", "Cloud Functions", "FCM", "Remote Config", "Crashlytics", "App Check"]],
+  [["UI & navigation", "الواجهات والتنقل"], ["Custom widgets", "Animations", "CustomPainter", "Theming", "Localization & RTL", "Figma to code", "GoRouter", "AutoRoute", "Deep links"]],
+  [["Security & storage", "الأمان والتخزين"], ["AES / RSA", "Secure storage", "Hive", "SQLite", "SharedPreferences", "Offline-first"]],
+  [["Monetization", "تحقيق الدخل"], ["AdMob", "Meta mediation", "RevenueCat", "In-app purchases"]],
+  [["Delivery & quality", "التسليم والجودة"], ["Git", "Azure Pipelines", "Fastlane", "Shorebird", "Unit tests", "Widget tests", "DevTools profiling"]]
+];
+var APPLE = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.6c0-2.5 2-3.7 2.1-3.8-1.2-1.7-3-1.9-3.6-2-1.5-.2-3 .9-3.8.9-.8 0-2-.9-3.3-.9-1.7 0-3.3 1-4.1 2.5-1.8 3.1-.5 7.6 1.3 10.1.8 1.2 1.8 2.6 3.1 2.5 1.3-.1 1.7-.8 3.3-.8 1.5 0 1.9.8 3.3.8 1.4 0 2.2-1.2 3-2.5.9-1.4 1.3-2.8 1.3-2.8s-2.6-1-2.6-4zM14 5.2c.7-.8 1.1-1.9 1-3-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.2-.6 2.9-1.4z"/></svg>';
+var PLAY = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 1.8c-.3.3-.4.7-.4 1.2v18c0 .5.1.9.4 1.2L13.8 12 3.6 1.8zm11.3 9.1 2.8-2.8L5.3.9c-.4-.2-.8-.3-1.1-.2l10.7 10.2zm0 2.2L4.2 23.3c.3.1.7 0 1.1-.2l12.4-7.2-2.8-2.8zm6.5-3.6-2.7-1.6-3 3 3 3 2.7-1.6c.8-.5.8-2.3 0-2.8z"/></svg>';
+var SHOTS = 4;
+function spaceLatin(v) {
+  if (typeof v === "string") return v.replace(/و(?=[A-Za-z])/g, "و ");
+  if (Array.isArray(v)) return v.map(spaceLatin);
+  if (v && typeof v === "object") { Object.keys(v).forEach(function (k) { v[k] = spaceLatin(v[k]); }); return v; }
+  return v;
+}
+spaceLatin(T.ar);
+APPS.forEach(function (a) { spaceLatin(a.arT); });
+CAPS.forEach(function (c) { spaceLatin(c.ar); });
+SKILLS.forEach(function (s) { s[0][1] = spaceLatin(s[0][1]); });
+
+function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+function byId(id) { return APPS.filter(function (a) { return a.id === id; })[0]; }
+function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+function ease(t) { return 1 - Math.pow(1 - t, 3); }
+var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var root = document.documentElement;
+var $ = function (id) { return document.getElementById(id); };
+var LANG = "en";
+var flowMQ = window.matchMedia("(max-width: 960px)");
+function isFlow() { return flowMQ.matches || reduce; }
+function tx(a) { return LANG === "ar" ? a.arT : a.en; }
+
+/* ---------- rendering (re-run on language change) ---------- */
+function renderApps() {
+  $("rail").innerHTML = APPS.map(function (a) {
+    var nm = LANG === "ar" && a.ar ? a.ar : (a.short || a.name);
+    return '<div class="pill" style="--c:' + a.c + '"><img src="img/' + a.id + '-icon.jpg" alt=""><b><a class="pill-main" href="#app-' + a.id + '">' + esc(nm) + '</a></b>' +
+      '<div class="pill-sub"><small>' + esc(tx(a).tag) + '</small><span class="pill-stores">' +
+        '<a class="ps" href="' + a.as + '" aria-label="' + esc(a.name) + ' · App Store" title="App Store">' + APPLE + '</a>' +
+        (a.gp ? '<a class="ps" href="' + a.gp + '" aria-label="' + esc(a.name) + ' · Google Play" title="Google Play">' + PLAY + '</a>' : '') +
+      '</span></div></div>';
+  }).join("");
+
+  $("dock").innerHTML = '<a class="up" href="#top" aria-label="' + T[LANG].top + '" data-name="' + T[LANG].top + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a><span class="sep" aria-hidden="true"></span>' +
+    APPS.map(function (a) {
+      return '<a href="#app-' + a.id + '" data-id="' + a.id + '" data-name="' + esc(a.name) + '" aria-label="' + esc(a.name) + '"><img src="img/' + a.id + '-icon.jpg" alt=""></a>';
+    }).join("");
+
+  $("chapters").innerHTML = APPS.map(function (a, n) {
+    var t = tx(a), cards = "";
+    for (var i = 0; i < SHOTS; i++) {
+      cards += '<button class="card" type="button" data-app="' + a.id + '" data-i="' + i + '" aria-label="' + esc(a.name) + ' ' + T[LANG].screen + ' ' + (i + 1) + '"><img src="img/' + a.id + '-' + i + '.jpg" alt="" decoding="async" ' + (n > 1 ? 'loading="lazy"' : '') + '></button>';
+    }
+    return '<div class="chapter" id="app-' + a.id + '" data-n="' + n + '" style="--c:' + a.c + '">' +
+      '<div class="stage">' +
+        '<div class="ghost" aria-hidden="true">' + esc(a.name) + '</div>' +
+        '<div class="info">' +
+          '<div class="count"><b>' + String(n + 1).padStart(2, "0") + '</b><span class="bar"><i></i></span>' + String(APPS.length).padStart(2, "0") + '</div>' +
+          '<div class="app-id"><img src="img/' + a.id + '-icon.jpg" alt=""><div><h3>' + esc(a.name) + (a.ar ? '<span lang="ar" dir="rtl">' + a.ar + '</span>' : '') + '</h3><div class="kind">' + esc(t.kind) + '</div></div></div>' +
+          '<p class="desc">' + esc(t.desc) + '</p>' +
+          '<ul class="feats">' + t.feats.map(function (f) { return '<li>' + esc(f) + '</li>'; }).join("") + '</ul>' +
+          '<div class="meta"><a class="store" href="' + a.as + '">' + APPLE + 'App Store</a>' + (a.gp ? '<a class="store" href="' + a.gp + '">' + PLAY + 'Google Play</a>' : '') + (t.note ? '<span class="note">' + esc(t.note) + '</span>' : '') + '</div>' +
+        '</div>' +
+        '<div class="deck">' + cards + '</div>' +
+      '</div>' +
+    '</div>';
+  }).join("");
+
+  $("caps").innerHTML = CAPS.map(function (c) {
+    var t = c[LANG];
+    return '<div class="cap rise"><div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + c.icon + '</svg></div><h3>' + esc(t[0]) + '</h3><p>' + esc(t[1]) + '</p>' +
+      (c.apps.length ? '<div class="proof">' + c.apps.map(function (id) { return '<a href="#app-' + id + '" title="' + esc(byId(id).name) + '"><img src="img/' + id + '-icon.jpg" alt="' + esc(byId(id).name) + '" loading="lazy"></a>'; }).join("") + '</div>' : '') + '</div>';
+  }).join("");
+
+  $("skill-list").innerHTML = SKILLS.map(function (s) {
+    return '<div class="skill rise"><h3>' + esc(s[0][LANG === "ar" ? 1 : 0]) + '</h3><div class="chips">' + s[1].map(function (c) { return '<span class="chip">' + esc(c) + '</span>'; }).join("") + '</div></div>';
+  }).join("");
+}
+
+function applyText() {
+  var d = T[LANG];
+  Array.prototype.forEach.call(document.querySelectorAll("[data-t]"), function (el) {
+    var v = d[el.getAttribute("data-t")];
+    if (v !== undefined) el.innerHTML = v;
+  });
+  $("name").innerHTML = '<span class="w">' + d.name[0] + '</span> <span class="w">' + d.name[1] + '</span>';
+  var alt = $("alt-name");
+  alt.textContent = d.alt;
+  alt.setAttribute("lang", LANG === "ar" ? "en" : "ar");
+  alt.setAttribute("dir", LANG === "ar" ? "ltr" : "rtl");
+  planets.forEach(function (p) { p.label.textContent = LANG === "ar" && p.app.ar ? p.app.ar : p.app.name; });
+}
+
+function scrollToEl(el, offset) {
+  window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY + offset, behavior: reduce ? "auto" : "smooth" });
+}
+/* ---------- phone menu ---------- */
+(function () {
+  var top = document.querySelector(".top"), btn = $("menu-btn");
+  function set(open) { top.classList.toggle("menu-open", open); btn.setAttribute("aria-expanded", String(open)); }
+  btn.addEventListener("click", function (e) { e.stopPropagation(); set(!top.classList.contains("menu-open")); });
+  $("nav").addEventListener("click", function (e) { if (e.target.closest("a")) set(false); });
+  document.addEventListener("click", function (e) { if (!top.contains(e.target)) set(false); });
+})();
+
+/* ---------- store sheet for touch devices ---------- */
+var touchUI = window.matchMedia("(hover: none)");
+var sheet, sheetOv, sheetApp = null, sheetFrom = null;
+function openSheet(a, from) {
+  sheet = $("sheet"); sheetOv = $("sheet-ov"); sheetApp = a; sheetFrom = from;
+  sheet.style.setProperty("--c", a.c);
+  $("sh-icon").src = "img/" + a.id + "-icon.jpg";
+  $("sh-title").textContent = LANG === "ar" && a.ar ? a.ar : a.name;
+  $("sh-kind").textContent = tx(a).kind;
+  $("sh-see-t").textContent = T[LANG].sheetSee;
+  var as = $("sh-as"), gp = $("sh-gp");
+  as.href = a.as; as.innerHTML = APPLE + "App Store";
+  gp.hidden = !a.gp; if (a.gp) { gp.href = a.gp; gp.innerHTML = PLAY + "Google Play"; }
+  sheet.style.transform = "";
+  sheet.classList.add("open"); sheetOv.classList.add("open");
+  $("sh-see").focus({ preventScroll: true });
+}
+function closeSheet() {
+  if (!sheet) return;
+  sheet.style.transform = "";
+  sheet.classList.remove("open"); sheetOv.classList.remove("open");
+  if (sheetFrom) sheetFrom.focus({ preventScroll: true });
+}
+document.addEventListener("click", function (e) {
+  if (e.target.id === "sheet-ov") { closeSheet(); return; }
+  if (e.target.closest("#sh-see")) {
+    var el = $("app-" + sheetApp.id); closeSheet();
+    setTimeout(function () { scrollToEl(el, -64); }, 120); return;
+  }
+  var m = e.target.closest(".pill-main");
+  if (m && touchUI.matches) {
+    e.preventDefault(); e.stopImmediatePropagation();
+    openSheet(byId(m.getAttribute("href").slice(5)), m);
+  }
+}, true);
+(function () {
+  var sh = $("sheet"), y0 = null, dy = 0;
+  sh.addEventListener("touchstart", function (e) { y0 = e.touches[0].clientY; dy = 0; sh.style.transition = "none"; }, { passive: true });
+  sh.addEventListener("touchmove", function (e) { if (y0 === null) return; dy = Math.max(0, e.touches[0].clientY - y0); sh.style.transform = "translateY(" + dy + "px)"; }, { passive: true });
+  sh.addEventListener("touchend", function () { sh.style.transition = ""; if (dy > 70) closeSheet(); else sh.style.transform = ""; y0 = null; });
+})();
+document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeSheet(); });
+
+/* ---------- smooth jumps ---------- */
+document.addEventListener("click", function (e) {
+  var a = e.target.closest('a[href^="#app-"]');
+  if (!a) return;
+  var el = document.querySelector(a.getAttribute("href"));
+  if (!el) return;
+  e.preventDefault();
+  scrollToEl(el, -64);
+});
+
+/* ---------- orbit ---------- */
+var orbit = $("orbit"), orbitIn = $("orbit-in"), screen = $("screen"), nowName = $("now-name"), hero = $("hero");
+var planets = APPS.map(function (a, i) {
+  var el = document.createElement("a");
+  el.className = "planet"; el.href = "#app-" + a.id; el.setAttribute("aria-label", a.name);
+  el.innerHTML = '<img src="img/' + a.id + '-icon.jpg" alt=""><span></span>';
+  orbitIn.appendChild(el);
+  return { el: el, label: el.querySelector("span"), app: a, ring: i % 2, phase: (Math.floor(i / 2) / 4) * Math.PI * 2 + (i % 2) * 0.6 };
+});
+var O = { w: 0, h: 0, R: 0, tilt: 0.3, t: 0, speed: 1, hover: false, front: null, lastSwap: 0, visible: true, mx: 0, my: 0 };
+function measureOrbit() {
+  O.w = orbit.clientWidth; O.h = orbit.clientHeight;
+  O.R = Math.min(O.w / 2 - 34, 300);
+  var r1 = $("ring1"), r2 = $("ring2");
+  r1.style.width = (O.R * 2) + "px"; r1.style.height = (O.R * 2 * O.tilt) + "px";
+  r2.style.width = (O.R * 1.36) + "px"; r2.style.height = (O.R * 1.36 * O.tilt) + "px";
+}
+function setScreen(app) {
+  var img = new Image();
+  img.src = "img/" + app.id + "-0.jpg"; img.alt = ""; img.className = "out";
+  screen.appendChild(img);
+  var old = screen.querySelectorAll("img");
+  requestAnimationFrame(function () { img.classList.remove("out"); });
+  for (var i = 0; i < old.length - 1; i++) { (function (o) { o.classList.add("out"); setTimeout(function () { o.remove(); }, 800); })(old[i]); }
+  nowName.textContent = LANG === "ar" && app.ar ? app.ar : app.name;
+  hero.style.setProperty("--hero-c", app.c);
+}
+orbit.addEventListener("pointerenter", function () { O.hover = true; });
+orbit.addEventListener("pointerleave", function () { O.hover = false; });
+function drawOrbit(dt) {
+  O.speed += ((O.hover ? 0.15 : 1) - O.speed) * 0.06;
+  if (!reduce) O.t += dt * 0.00018 * O.speed;
+  var cx = O.w / 2, cy = O.h / 2, best = -2, bestP = null;
+  planets.forEach(function (p) {
+    var rr = p.ring ? O.R * 0.68 : O.R;
+    var a = p.phase + O.t * (p.ring ? -1.35 : 1);
+    var depth = Math.sin(a);
+    var x = cx + Math.cos(a) * rr, y = cy + depth * rr * O.tilt;
+    var s = 0.62 + 0.48 * (depth + 1) / 2;
+    p.el.style.transform = "translate3d(" + x.toFixed(1) + "px," + y.toFixed(1) + "px,0) scale(" + s.toFixed(3) + ")";
+    var z = depth > 0 ? 10 + Math.round(depth * 10) : 1;
+    if (z !== p.z) { p.z = z; p.el.style.zIndex = String(z); }
+    p.el.style.opacity = (0.45 + 0.55 * (depth + 1) / 2).toFixed(2);
+    if (depth > best) { best = depth; bestP = p; }
+  });
+  var now = performance.now();
+  if (bestP && bestP.app !== O.front && now - O.lastSwap > 900) { O.front = bestP.app; O.lastSwap = now; setScreen(bestP.app); }
+}
+
+/* ---------- chapters: progress follows the section's position, eased; nothing is pinned ---------- */
+var chapters = [];
+function collectChapters() {
+  chapters = Array.prototype.map.call(document.querySelectorAll(".chapter"), function (el) {
+    return { el: el, app: APPS[+el.getAttribute("data-n")], deck: el.querySelector(".deck"), cards: el.querySelectorAll(".card"),
+      ghost: el.querySelector(".ghost"), bar: el.querySelector(".count .bar i"), info: el.querySelector(".info"), parts: el.querySelectorAll(".info > *"),
+      target: 0, cur: 0, it: 0, ic: 0, near: false, done: false, W: 0, H: 0 };
+  });
+  Array.prototype.forEach.call(document.querySelectorAll(".card img"), function (img) {
+    if (!img.complete) img.addEventListener("load", function () { measureDecks(); wake(); });
+  });
+}
+var revealIO = window.IntersectionObserver ? new IntersectionObserver(function (entries) {
+  entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); revealIO.unobserve(en.target); } });
+}, { rootMargin: "0px 0px -12% 0px", threshold: 0.05 }) : null;
+var deckIO = window.IntersectionObserver ? new IntersectionObserver(function (entries) {
+  entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); deckIO.unobserve(en.target); } });
+}, { rootMargin: "0px 0px -18% 0px", threshold: 0.6 }) : null;
+function armReveal() {
+  chapters.forEach(function (ch) {
+    if (!isFlow() || !revealIO) { ch.el.classList.add("in"); ch.deck.classList.add("in"); return; }
+    if (!ch.el.classList.contains("in")) revealIO.observe(ch.el);
+    if (!ch.deck.classList.contains("in")) deckIO.observe(ch.deck);
+  });
+}
+function measureDecks() {
+  if (isFlow()) {
+    var dir = root.dir === "rtl" ? -1 : 1;
+    chapters.forEach(function (ch) {
+      clearLayout(ch);
+      ch.W = ch.deck.clientWidth; ch.H = ch.cards[0].offsetHeight;
+      var cw = ch.H * 0.48, n = ch.cards.length;
+      var spacing = Math.max(cw * 0.42, Math.min(cw * 0.98, (ch.W * 0.96 - cw) / 3));
+      for (var i = 0; i < n; i++) {
+        var k = (i - (n - 1) / 2) * dir, c = ch.cards[i].style;
+        c.setProperty("--kk", k.toFixed(2)); c.setProperty("--d", String(i));
+        c.setProperty("--fx", (k * spacing).toFixed(1) + "px"); c.setProperty("--fy", (Math.abs(k) * 16).toFixed(1) + "px"); c.setProperty("--fr", (k * 3).toFixed(2) + "deg");
+        c.zIndex = String(n - i);
+      }
+    });
+    return;
+  }
+  chapters.forEach(function (ch) {
+    for (var i = 0; i < ch.cards.length; i++) ch.cards[i].style.height = "";
+    ch.W = ch.deck.clientWidth;
+    var fit = ch.deck.clientHeight * 0.92, h = ch.cards[0].offsetHeight;
+    if (fit > 120 && h > fit) { h = fit; for (var j = 0; j < ch.cards.length; j++) ch.cards[j].style.height = h + "px"; }
+    ch.H = h;
+  });
+}
+function smooth(t) { t = clamp(t, 0, 1); return t * t * (3 - 2 * t); }
+function clearLayout(ch) {
+  for (var i = 0; i < ch.cards.length; i++) { ch.cards[i].style.transform = ""; ch.cards[i].style.opacity = ""; ch.cards[i].style.height = ""; ch.cards[i].style.removeProperty("--shine"); }
+  for (var j = 0; j < ch.parts.length; j++) { ch.parts[j].style.transform = ""; ch.parts[j].style.opacity = ""; }
+  ch.ghost.style.transform = "";
+}
+function layout(ch, p, sway, ip) {
+  if (isFlow()) { ch.bar.style.transform = "scaleX(" + clamp(p, 0, 1).toFixed(3) + ")"; return; }
+  var e = reduce ? 1 : smooth(p);
+  var dir = root.dir === "rtl" ? -1 : 1;
+  var cw = ch.H * 0.48;
+  var spacing = Math.max(cw * 0.42, Math.min(cw * 0.98, (ch.W * 0.96 - cw) / 3));
+  var n = ch.cards.length;
+  for (var i = 0; i < n; i++) {
+    var k = (i - (n - 1) / 2) * dir;
+    var local = reduce ? 1 : smooth((p - i * 0.06) / 0.8);
+    var x = k * spacing * local;
+    var y = Math.abs(k) * 22 * local + (1 - local) * 150;
+    var rz = k * (3 * local) + (1 - local) * (k * 8);
+    var rx = (1 - local) * 32;
+    var ry = -k * (1 - local) * 18;
+    var s = 0.82 + 0.18 * local;
+    ch.cards[i].style.transform = "translate3d(calc(-50% + " + x.toFixed(1) + "px), calc(-50% + " + y.toFixed(1) + "px), 0) rotateX(" + rx.toFixed(2) + "deg) rotateY(" + ry.toFixed(2) + "deg) rotate(" + rz.toFixed(2) + "deg) scale(" + s.toFixed(3) + ")";
+    ch.cards[i].style.zIndex = String(n - i);
+    ch.cards[i].style.opacity = (0.25 + 0.75 * smooth(p * 3 - i * 0.15)).toFixed(3);
+    var sh = smooth((p - 0.55 - i * 0.07) / 0.35);
+    ch.cards[i].style.setProperty("--shine", (-130 + 260 * sh).toFixed(1) + "%");
+  }
+  if (!reduce) {
+    ch.ghost.style.transform = "translate3d(" + (sway * 30 * dir).toFixed(2) + "%,0,0)";
+    for (var j = 0; j < ch.parts.length; j++) {
+      var q = smooth(ip * 1.5 - j * 0.1);
+      ch.parts[j].style.transform = "translate3d(" + ((1 - q) * -48 * dir).toFixed(1) + "px," + ((1 - q) * 18).toFixed(1) + "px,0)";
+      ch.parts[j].style.opacity = (0.2 + 0.8 * q).toFixed(3);
+    }
+  }
+  ch.bar.style.transform = "scaleX(" + clamp(p, 0, 1).toFixed(3) + ")";
+}
+
+/* ---------- nav, rail, dock, progress ---------- */
+var dock = $("dock"), railWrap = $("rail-wrap"), progress = $("progress");
+var navLinks = document.querySelectorAll("#nav a");
+var sections = ["work", "capabilities", "experience", "skills", "contact"].map(function (id) { return $(id); });
+var activeId = null, dockOn = null, navHere = null;
+var side = $("side");
+function setActive(id, force) {
+  if (id === activeId && !force) return;
+  activeId = id;
+  document.body.classList.toggle("tinted", !!id);
+  if (id) root.style.setProperty("--tint", byId(id).c);
+  Array.prototype.forEach.call(dock.querySelectorAll("a[data-id]"), function (l) {
+    var on = l.getAttribute("data-id") === id;
+    l.classList.toggle("active", on);
+    if (on) l.setAttribute("aria-current", "true"); else l.removeAttribute("aria-current");
+  });
+}
+var M = { vh: 0, max: 0, rail: 0, hero: 0, secs: [] };
+function absTop(el) { return el.getBoundingClientRect().top + window.scrollY; }
+function measure() {
+  M.vh = window.innerHeight;
+  M.max = document.documentElement.scrollHeight - M.vh;
+  M.rail = absTop(railWrap) + railWrap.offsetHeight;
+  M.hero = absTop(hero) + hero.offsetHeight;
+  M.secs = sections.map(function (sec) { return { id: sec.id, top: absTop(sec) }; });
+  chapters.forEach(function (ch) {
+    ch.top = absTop(ch.el); ch.h = ch.el.offsetHeight;
+    ch.dTop = absTop(ch.deck); ch.dH = ch.deck.offsetHeight;
+    ch.iTop = absTop(ch.info);
+  });
+  lastRead = -1;
+}
+var lastRead = -1;
+function read(y) {
+  var vh = M.vh, current = null;
+  chapters.forEach(function (ch) {
+    var top = ch.top - y;
+    if (top <= vh * 0.55 && top + ch.h >= vh * 0.45) current = ch.app.id;
+    ch.near = top + ch.h > -vh * 0.3 && top < vh * 1.3;
+    var dTop = ch.dTop - y;
+    ch.target = (vh * 0.88 - dTop) / (vh * 0.88 - (vh * 0.5 - ch.dH / 2));
+    ch.it = (vh * 0.92 - (ch.iTop - y)) / (vh * 0.55);
+    ch.sway = (top + ch.h / 2 - vh / 2) / vh;
+  });
+  setActive(current);
+  var showDock = M.rail - y < 40;
+  if (showDock !== dockOn) { dockOn = showDock; dock.classList.toggle("on", showDock); side.classList.toggle("low", !showDock); if (showDock && window.__fabHint) window.__fabHint(); }
+  progress.style.transform = "scaleX(" + (M.max > 0 ? clamp(y / M.max, 0, 1) : 0).toFixed(4) + ")";
+  var here = null;
+  M.secs.forEach(function (sec) { if (sec.top - y < vh * 0.4) here = sec.id; });
+  if (here !== navHere) {
+    navHere = here;
+    for (var i = 0; i < navLinks.length; i++) navLinks[i].classList.toggle("here", navLinks[i].getAttribute("data-sec") === here);
+  }
+  O.visible = M.hero - y > 0;
+}
+function wake() { chapters.forEach(function (ch) { ch.done = false; }); }
+
+var last = performance.now();
+function loop(now) {
+  var dt = Math.min(64, now - last); last = now;
+  var y = window.scrollY;
+  if (y !== lastRead) { lastRead = y; read(y); wake(); }
+  var k = reduce ? 1 : 1 - Math.pow(1 - 0.22, dt / 16.7);
+  chapters.forEach(function (ch) {
+    if (!ch.near) { ch.cur = clamp(ch.target, 0, 1); ch.sw = ch.sway || 0; ch.ic = clamp(ch.it, 0, 1); return; }
+    var tgt = clamp(ch.target, 0, 1), d = tgt - ch.cur, ds = (ch.sway || 0) - (ch.sw || 0), di = clamp(ch.it, 0, 1) - ch.ic;
+    if (ch.done && Math.abs(d) < 0.0005 && Math.abs(ds) < 0.0005 && Math.abs(di) < 0.0005) return;
+    ch.cur += d * k; ch.sw = (ch.sw || 0) + ds * k; ch.ic += di * k;
+    ch.done = Math.abs(d) < 0.0005 && Math.abs(ds) < 0.0005 && Math.abs(di) < 0.0005;
+    layout(ch, ch.cur, ch.sw, ch.ic);
+  });
+  if (O.visible) drawOrbit(dt);
+  requestAnimationFrame(loop);
+}
+var measureQueued = false;
+function queueMeasure() { if (measureQueued) return; measureQueued = true; requestAnimationFrame(function () { measureQueued = false; measure(); }); }
+function onResize() { measureOrbit(); measureDecks(); armReveal(); measure(); read(window.scrollY); wake(); }
+window.addEventListener("resize", onResize);
+if (window.ResizeObserver) new ResizeObserver(queueMeasure).observe(document.body);
+
+/* ---------- language ---------- */
+var langBox = $("lang");
+function setLang(l, keepScroll) {
+  var anchor = null, offset = 0;
+  if (keepScroll) {
+    var probe = chapters.filter(function (ch) { var r = ch.el.getBoundingClientRect(); return r.bottom > 0; })[0];
+    if (probe && probe.el.getBoundingClientRect().top < window.innerHeight) { anchor = probe.app.id; offset = probe.el.getBoundingClientRect().top; }
+  }
+  LANG = l;
+  $("copy-email").setAttribute("aria-label", T[l]["c.copy"]);
+  $("side-email").setAttribute("aria-label", T[l].sideCopy);
+  $("side-fab").setAttribute("aria-label", T[l].sideOpen);
+  $("s-hint").textContent = T[l].hint;
+  root.lang = l; root.dir = l === "ar" ? "rtl" : "ltr";
+  langBox.classList.toggle("is-ar", l === "ar");
+  Array.prototype.forEach.call(langBox.querySelectorAll("button"), function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-lang") === l)); });
+  renderApps(); applyText(); collectChapters(); armReveal();
+  if (O.front) { nowName.textContent = l === "ar" && O.front.ar ? O.front.ar : O.front.name; }
+  Array.prototype.forEach.call(document.querySelectorAll("main, .wrap > *"), function (el) { el.classList.remove("swap"); void el.offsetWidth; if (keepScroll) el.classList.add("swap"); });
+  measureOrbit(); measureDecks();
+  if (anchor) { var el = $("app-" + anchor); window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - offset, behavior: "auto" }); }
+  measure(); read(window.scrollY); setActive(activeId, true); chapters.forEach(function (ch) { ch.cur = clamp(ch.target, 0, 1); ch.sw = ch.sway || 0; ch.ic = clamp(ch.it, 0, 1); layout(ch, ch.cur, ch.sw, ch.ic); });
+  try { localStorage.setItem("lang", l); } catch (err) {}
+}
+langBox.addEventListener("click", function (e) {
+  var b = e.target.closest("button[data-lang]"); if (!b) return;
+  var l = b.getAttribute("data-lang");
+  if (l !== LANG) setLang(l, true);
+});
+var saved = null;
+try { saved = localStorage.getItem("lang"); } catch (err) {}
+setLang(saved === "ar" ? "ar" : "en", false);
+onResize();
+setScreen(APPS[0]); O.front = APPS[0]; O.lastSwap = performance.now();
+requestAnimationFrame(loop);
+
+/* ---------- lightbox ---------- */
+var lb = $("lb"), lbImg = $("lb-img"), lbCap = $("lb-cap"), cur = null, idx = 0, lastFocus = null;
+function show() { lbImg.src = "img/" + cur.id + "-" + idx + ".jpg"; lbImg.alt = cur.name + " " + T[LANG].screen + " " + (idx + 1); lbCap.textContent = cur.name + "  ·  " + (idx + 1) + " / " + SHOTS; }
+function closeLb() { lb.hidden = true; if (lastFocus) lastFocus.focus(); }
+function step(d) { idx = (idx + d + SHOTS) % SHOTS; show(); }
+document.addEventListener("click", function (e) {
+  var s = e.target.closest(".card"); if (!s) return;
+  cur = byId(s.getAttribute("data-app")); idx = +s.getAttribute("data-i"); lastFocus = s;
+  show(); lb.hidden = false; $("lb-close").focus();
+});
+$("lb-close").addEventListener("click", closeLb);
+$("lb-prev").addEventListener("click", function () { step(-1); });
+$("lb-next").addEventListener("click", function () { step(1); });
+lb.addEventListener("click", function (e) { if (e.target === lb) closeLb(); });
+var tx0 = null;
+lb.addEventListener("touchstart", function (e) { tx0 = e.touches[0].clientX; }, { passive: true });
+lb.addEventListener("touchend", function (e) { if (tx0 === null) return; var d = e.changedTouches[0].clientX - tx0; if (Math.abs(d) > 40) step(d < 0 ? 1 : -1); tx0 = null; });
+document.addEventListener("keydown", function (e) {
+  if (lb.hidden) return;
+  if (e.key === "Escape") closeLb();
+  if (e.key === "ArrowLeft") step(-1);
+  if (e.key === "ArrowRight") step(1);
+});
+
+var toastT = null;
+function toast(msg) {
+  var t = $("toast"); t.textContent = msg; t.hidden = false;
+  clearTimeout(toastT); toastT = setTimeout(function () { t.hidden = true; }, 2600);
+}
+var fab = $("side-fab");
+(function () {
+  var btns = side.querySelectorAll(".s-btn"), box = $("fab-icons"), n = 0;
+  var cols = Array.prototype.map.call(btns, function (b) { return b.style.getPropertyValue("--brand").trim(); });
+  box.innerHTML = Array.prototype.map.call(btns, function (b) { return b.querySelector("svg").outerHTML; }).join("");
+  var icons = box.querySelectorAll("svg");
+  function show(i) {
+    for (var j = 0; j < icons.length; j++) icons[j].classList.toggle("on", j === i);
+    var c = cols[i];
+    fab.style.setProperty("--fabc", c.indexOf("var(") === 0 ? "#24292f" : c);
+  }
+  show(0);
+  if (!reduce) setInterval(function () { if (!side.classList.contains("open") && !document.hidden) { n = (n + 1) % icons.length; show(n); } }, 2400);
+  var hinted = false;
+  window.__fabHint = function () {
+    if (hinted || window.innerWidth > 1320) return; hinted = true;
+    setTimeout(function () { side.classList.add("hint"); setTimeout(function () { side.classList.remove("hint"); }, 3200); }, 600);
+  };
+})();
+fab.addEventListener("click", function () {
+  var open = !side.classList.contains("open");
+  side.classList.toggle("open", open); side.classList.remove("hint"); fab.setAttribute("aria-expanded", String(open));
+});
+document.addEventListener("click", function (e) {
+  if (side.classList.contains("open") && !side.contains(e.target)) { side.classList.remove("open"); fab.setAttribute("aria-expanded", "false"); }
+});
+$("side-email").addEventListener("click", function () {
+  try { navigator.clipboard.writeText("eslamnegm010@gmail.com").then(function () { toast(T[LANG].emailCopied); }, function () { toast(T[LANG].emailIs); }); }
+  catch (err) { toast(T[LANG].emailIs); }
+});
+var photo = null;
+function openPhoto(btn) {
+  if (photo) return;
+  var src = btn.querySelector("img"), r = src.getBoundingClientRect();
+  var S = Math.min(300, window.innerWidth - 48);
+  var cx = clamp(r.left + r.width / 2, S / 2 + 16, window.innerWidth - S / 2 - 16);
+  var cy = clamp(r.top + r.height / 2, S / 2 + 76, window.innerHeight - S / 2 - 16);
+  var ov = document.createElement("div"); ov.className = "ph-ov";
+  var img = document.createElement("img"); img.className = "ph-big"; img.src = src.src; img.alt = "Eslam Negm";
+  img.style.width = S + "px"; img.style.height = S + "px"; img.style.left = (cx - S / 2) + "px"; img.style.top = (cy - S / 2) + "px";
+  document.body.appendChild(ov); document.body.appendChild(img);
+  var from = "translate(" + (r.left + r.width / 2 - cx).toFixed(1) + "px," + (r.top + r.height / 2 - cy).toFixed(1) + "px) scale(" + (r.width / S).toFixed(4) + ")";
+  var opts = { duration: reduce ? 0 : 520, easing: "cubic-bezier(.2,.8,.2,1)", fill: "both" };
+  src.style.visibility = "hidden";
+  img.animate([{ transform: from, borderRadius: "50%" }, { transform: "none", borderRadius: "28px" }], opts);
+  ov.animate([{ opacity: 0 }, { opacity: 1 }], opts);
+  photo = { ov: ov, img: img, src: src, from: from, btn: btn };
+  ov.addEventListener("click", closePhoto); img.addEventListener("click", closePhoto);
+}
+function closePhoto() {
+  if (!photo || photo.closing) return;
+  var p = photo; p.closing = true;
+  var opts = { duration: reduce ? 0 : 420, easing: "cubic-bezier(.4,0,.2,1)", fill: "both" };
+  p.ov.animate([{ opacity: 1 }, { opacity: 0 }], opts);
+  p.img.animate([{ transform: "none", borderRadius: "28px" }, { transform: p.from, borderRadius: "50%" }], opts).finished.then(function () {
+    p.src.style.visibility = ""; p.ov.remove(); p.img.remove(); photo = null;
+    p.btn.focus({ preventScroll: true });
+  });
+}
+Array.prototype.forEach.call(document.querySelectorAll(".me-btn"), function (b) { b.addEventListener("click", function () { openPhoto(b); }); });
+document.addEventListener("keydown", function (e) { if (e.key === "Escape" && photo) closePhoto(); });
+var COPYI = $("copy-email").innerHTML;
+var CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>';
+$("copy-email").addEventListener("click", function () {
+  var btn = this;
+  var done = function () { btn.innerHTML = CHECK; btn.setAttribute("aria-label", T[LANG].copied); setTimeout(function () { btn.innerHTML = COPYI; btn.setAttribute("aria-label", T[LANG]["c.copy"]); }, 1600); };
+  var fallback = function () {
+    var r = document.createRange(); r.selectNodeContents($("email"));
+    var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+    btn.setAttribute("aria-label", T[LANG].pressCopy);
+  };
+  try { navigator.clipboard.writeText("eslamnegm010@gmail.com").then(done, fallback); } catch (err) { fallback(); }
+});
+</script>
+
+</body>
+</html>
