@@ -440,7 +440,8 @@ html.sheet-lock, html.sheet-lock body { overflow: hidden; }
   position: absolute; left: 50%; top: 50%; height: min(60vh, 560px); width: auto; border: 0; padding: 0; background: none;
   border-radius: 20px; overflow: hidden; cursor: zoom-in; box-shadow: var(--shadow); transform: translate(-50%, -50%); will-change: transform;
 }
-.card img { height: 100%; width: auto; display: block; }
+.card { aspect-ratio: var(--ar, 0.462); background: color-mix(in srgb, var(--ink) 7%, var(--surface)); }
+.card img { height: 100%; width: 100%; object-fit: cover; display: block; }
 .card::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.38) 48%, rgba(255,255,255,.08) 56%, transparent 66%); transform: translateX(var(--shine, -130%)); }
 
 /* other sections */
@@ -635,7 +636,7 @@ footer { color: var(--muted); font-size: 0.85rem; display: flex; justify-content
 <div class="loader" id="loader" aria-hidden="true">
   <div class="ld-stage">
     <svg class="ld-ring" viewBox="0 0 300 300"><circle cx="150" cy="150" r="146" class="ld-track"/><circle cx="150" cy="150" r="146" class="ld-bar" id="ld-bar"/></svg>
-    <div class="ld-orbit" id="ld-orbit"><img src="img/hazzoura-icon.jpg" alt="" style="--k:0"><img src="img/sela-icon.jpg" alt="" style="--k:1"><img src="img/hajj-icon.jpg" alt="" style="--k:2"><img src="img/fhe-icon.jpg" alt="" style="--k:3"><img src="img/ansaby-icon.jpg" alt="" style="--k:4"><img src="img/slots-icon.jpg" alt="" style="--k:5"><img src="img/square-icon.jpg" alt="" style="--k:6"><img src="img/melocanna-icon.jpg" alt="" style="--k:7"></div>
+    <div class="ld-orbit" id="ld-orbit"><img src="img/hazzoura-icon.webp" alt="" style="--k:0"><img src="img/sela-icon.webp" alt="" style="--k:1"><img src="img/hajj-icon.webp" alt="" style="--k:2"><img src="img/fhe-icon.webp" alt="" style="--k:3"><img src="img/ansaby-icon.webp" alt="" style="--k:4"><img src="img/slots-icon.webp" alt="" style="--k:5"><img src="img/square-icon.webp" alt="" style="--k:6"><img src="img/melocanna-icon.webp" alt="" style="--k:7"></div>
     <div class="ld-core"><b id="ld-num">0</b><span id="ld-txt">Loading the apps</span></div>
   </div>
   <div class="ld-mark">eslam<span>.</span>negm</div>
@@ -711,7 +712,7 @@ footer { color: var(--muted); font-size: 0.85rem; display: flex; justify-content
   <section class="hero" id="hero" aria-label="Introduction">
     <div class="glow" id="glow" aria-hidden="true"></div>
     <div class="hero-text intro" id="intro">
-      <div class="hello"><button class="me-btn" type="button" aria-label="View photo"><img class="me" src="img/me.jpg" alt="Eslam Negm" width="68" height="68"></button><span class="avail"><span class="dot" aria-hidden="true"></span><span data-t="avail">Open to new Flutter projects</span></span></div>
+      <div class="hello"><button class="me-btn" type="button" aria-label="View photo"><img class="me" src="img/me.webp" alt="Eslam Negm" width="68" height="68"></button><span class="avail"><span class="dot" aria-hidden="true"></span><span data-t="avail">Open to new Flutter projects</span></span></div>
       <div class="alt-name" id="alt-name" lang="ar" dir="rtl">إسلام نجم</div>
       <h1 id="name"><span class="w">Eslam</span> <span class="w">Negm</span></h1>
       <p class="role" data-t="role">Mobile Application Developer <b>· Flutter &amp; Dart</b></p>
@@ -782,7 +783,7 @@ footer { color: var(--muted); font-size: 0.85rem; display: flex; justify-content
             <li>Apply Clean Architecture, SOLID, AES/RSA encryption and native-level data protection to keep the apps secure and scalable.</li>
             <li>Speed up releases with Azure Pipelines, Fastlane and Shorebird code push, working closely with product and design.</li>
           </ul>
-          <div class="apps"><img src="img/sela-icon.jpg" alt="SELA Super App"><img src="img/hajj-icon.jpg" alt="Hajj Expo"><img src="img/fhe-icon.jpg" alt="Falcon &amp; Hunting Exhibition"></div>
+          <div class="apps"><img src="img/sela-icon.webp" alt="SELA Super App"><img src="img/hajj-icon.webp" alt="Hajj Expo"><img src="img/fhe-icon.webp" alt="Falcon &amp; Hunting Exhibition"></div>
         </div>
       </div>
       <div class="job rise">
@@ -814,7 +815,7 @@ footer { color: var(--muted); font-size: 0.85rem; display: flex; justify-content
 
   <section class="contact rise" id="contact">
     <div>
-      <div class="contact-me"><button class="me-btn" type="button" aria-label="View photo"><img src="img/me.jpg" alt="Eslam Negm" loading="lazy"></button><div class="label" data-t="c.label">Contact</div></div>
+      <div class="contact-me"><button class="me-btn" type="button" aria-label="View photo"><img src="img/me.webp" alt="Eslam Negm" loading="lazy"></button><div class="label" data-t="c.label">Contact</div></div>
       <h2 data-t="c.title">Have a Flutter app to build?</h2>
       <p data-t="c.sub">Send me a short note about the product and the timeline.</p>
     </div>
@@ -868,7 +869,7 @@ footer { color: var(--muted); font-size: 0.85rem; display: flex; justify-content
 <div class="sheet-ov" id="sheet-ov"></div>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sh-title">
   <div class="grab" aria-hidden="true"></div>
-  <div class="sh-head"><img id="sh-icon" src="img/hazzoura-icon.jpg" alt=""><div><h3 id="sh-title">Hazzoura</h3><span id="sh-kind"></span></div></div>
+  <div class="sh-head"><img id="sh-icon" src="img/hazzoura-icon.webp" alt=""><div><h3 id="sh-title">Hazzoura</h3><span id="sh-kind"></span></div></div>
   <div class="sh-actions">
     <button class="sh-btn primary" type="button" id="sh-see"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg><span id="sh-see-t">See it on this page</span></button>
     <a class="sh-btn" id="sh-as" href="#"></a>
@@ -987,7 +988,7 @@ var APPS = [
     arT: { tag: "حجوزات", kind: "حجز خدمات التجميل والسبا والحلاقة",
       desc: "احجز الصالونات والسبا والحلاقين بالقرب منك، للرجال والنساء، مع معرفة المواعيد المتاحة لحظيًا.",
       feats: ["مزوّدون بالقرب من موقعك", "أقسام السبا والصالون والحلاقة", "حجز فوري", "الدفع المسبق لتثبيت الموعد", "استرداد نقدي وعروض", "بحث وفلاتر"] } },
-  { id: "square", name: "Square", ar: "سكوير", c: "#22a9c8", as: AS + "id1626286616",
+  { id: "square", name: "Square", ar: "سكوير", arR: 0.5625, c: "#22a9c8", as: AS + "id1626286616",
     en: { tag: "Grocery", kind: "Grocery and household shopping",
       desc: "Everything for the home in one app, with a built-in wallet for fast checkout.",
       feats: ["Square wallet", "Fast product search", "Category explorer", "Cashback offers"] },
@@ -1072,7 +1073,7 @@ function tx(a) { return LANG === "ar" ? a.arT : a.en; }
 function renderApps() {
   $("rail").innerHTML = APPS.map(function (a) {
     var nm = LANG === "ar" && a.ar ? a.ar : (a.short || a.name);
-    return '<div class="pill" style="--c:' + a.c + '"><img src="img/' + a.id + '-icon.jpg" alt=""><b><a class="pill-main" href="#app-' + a.id + '">' + esc(nm) + '</a></b>' +
+    return '<div class="pill" style="--c:' + a.c + '"><img src="img/' + a.id + '-icon.webp" alt=""><b><a class="pill-main" href="#app-' + a.id + '">' + esc(nm) + '</a></b>' +
       '<div class="pill-sub"><small>' + esc(tx(a).tag) + '</small><span class="pill-stores">' +
         '<a class="ps" href="' + a.as + '" aria-label="' + esc(a.name) + ' · App Store" title="App Store">' + APPLE + '</a>' +
         (a.gp ? '<a class="ps" href="' + a.gp + '" aria-label="' + esc(a.name) + ' · Google Play" title="Google Play">' + PLAY + '</a>' : '') +
@@ -1081,20 +1082,20 @@ function renderApps() {
 
   $("dock").innerHTML = '<a class="up" href="#top" aria-label="' + T[LANG].top + '" data-name="' + T[LANG].top + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a><span class="sep" aria-hidden="true"></span>' +
     APPS.map(function (a) {
-      return '<a href="#app-' + a.id + '" data-id="' + a.id + '" data-name="' + esc(a.name) + '" aria-label="' + esc(a.name) + '"><img src="img/' + a.id + '-icon.jpg" alt=""></a>';
+      return '<a href="#app-' + a.id + '" data-id="' + a.id + '" data-name="' + esc(a.name) + '" aria-label="' + esc(a.name) + '"><img src="img/' + a.id + '-icon.webp" alt=""></a>';
     }).join("");
 
   $("chapters").innerHTML = APPS.map(function (a, n) {
     var t = tx(a), cards = "";
     for (var i = 0; i < SHOTS; i++) {
-      cards += '<button class="card" type="button" data-app="' + a.id + '" data-i="' + i + '" aria-label="' + esc(a.name) + ' ' + T[LANG].screen + ' ' + (i + 1) + '"><img src="img/' + a.id + '-' + i + '.jpg" alt="" decoding="async" ' + (n > 1 ? 'loading="lazy"' : '') + '></button>';
+      cards += '<button class="card" type="button" data-app="' + a.id + '" data-i="' + i + '" aria-label="' + esc(a.name) + ' ' + T[LANG].screen + ' ' + (i + 1) + '"><img src="img/' + a.id + '-' + i + '.webp" alt="" decoding="async" ' + (n > 1 ? 'loading="lazy"' : '') + '></button>';
     }
-    return '<div class="chapter" id="app-' + a.id + '" data-n="' + n + '" style="--c:' + a.c + '">' +
+    return '<div class="chapter" id="app-' + a.id + '" data-n="' + n + '" style="--c:' + a.c + (a.arR ? ';--ar:' + a.arR : '') + '">' +
       '<div class="stage">' +
         '<div class="ghost" aria-hidden="true">' + esc(a.name) + '</div>' +
         '<div class="info">' +
           '<div class="count"><b>' + String(n + 1).padStart(2, "0") + '</b><span class="bar"><i></i></span>' + String(APPS.length).padStart(2, "0") + '</div>' +
-          '<div class="app-id"><img src="img/' + a.id + '-icon.jpg" alt=""><div><h3>' + esc(a.name) + (a.ar ? '<span lang="ar" dir="rtl">' + a.ar + '</span>' : '') + '</h3><div class="kind">' + esc(t.kind) + '</div></div></div>' +
+          '<div class="app-id"><img src="img/' + a.id + '-icon.webp" alt=""><div><h3>' + esc(a.name) + (a.ar ? '<span lang="ar" dir="rtl">' + a.ar + '</span>' : '') + '</h3><div class="kind">' + esc(t.kind) + '</div></div></div>' +
           '<p class="desc">' + esc(t.desc) + '</p>' +
           '<ul class="feats">' + t.feats.map(function (f) { return '<li>' + esc(f) + '</li>'; }).join("") + '</ul>' +
           '<div class="meta"><a class="store" href="' + a.as + '">' + APPLE + 'App Store</a>' + (a.gp ? '<a class="store" href="' + a.gp + '">' + PLAY + 'Google Play</a>' : '') + (t.note ? '<span class="note">' + esc(t.note) + '</span>' : '') + '</div>' +
@@ -1107,7 +1108,7 @@ function renderApps() {
   $("caps").innerHTML = CAPS.map(function (c) {
     var t = c[LANG];
     return '<div class="cap rise"><div class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + c.icon + '</svg></div><h3>' + esc(t[0]) + '</h3><p>' + esc(t[1]) + '</p>' +
-      (c.apps.length ? '<div class="proof">' + c.apps.map(function (id) { return '<a href="#app-' + id + '" title="' + esc(byId(id).name) + '"><img src="img/' + id + '-icon.jpg" alt="' + esc(byId(id).name) + '" loading="lazy"></a>'; }).join("") + '</div>' : '') + '</div>';
+      (c.apps.length ? '<div class="proof">' + c.apps.map(function (id) { return '<a href="#app-' + id + '" title="' + esc(byId(id).name) + '"><img src="img/' + id + '-icon.webp" alt="' + esc(byId(id).name) + '" loading="lazy"></a>'; }).join("") + '</div>' : '') + '</div>';
   }).join("");
 
   $("skill-list").innerHTML = SKILLS.map(function (s) {
@@ -1147,7 +1148,7 @@ var sheet, sheetOv, sheetApp = null, sheetFrom = null;
 function openSheet(a, from) {
   sheet = $("sheet"); sheetOv = $("sheet-ov"); sheetApp = a; sheetFrom = from;
   sheet.style.setProperty("--c", a.c);
-  $("sh-icon").src = "img/" + a.id + "-icon.jpg";
+  $("sh-icon").src = "img/" + a.id + "-icon.webp";
   $("sh-title").textContent = LANG === "ar" && a.ar ? a.ar : a.name;
   $("sh-kind").textContent = tx(a).kind;
   $("sh-see-t").textContent = T[LANG].sheetSee;
@@ -1200,7 +1201,7 @@ var orbit = $("orbit"), orbitIn = $("orbit-in"), screen = $("screen"), nowName =
 var planets = APPS.map(function (a, i) {
   var el = document.createElement("a");
   el.className = "planet"; el.href = "#app-" + a.id; el.setAttribute("aria-label", a.name);
-  el.innerHTML = '<img src="img/' + a.id + '-icon.jpg" alt=""><span></span>';
+  el.innerHTML = '<img src="img/' + a.id + '-icon.webp" alt=""><span></span>';
   orbitIn.appendChild(el);
   return { el: el, label: el.querySelector("span"), app: a, ring: i % 2, phase: (Math.floor(i / 2) / 4) * Math.PI * 2 + (i % 2) * 0.6 };
 });
@@ -1214,7 +1215,7 @@ function measureOrbit() {
 }
 function setScreen(app) {
   var img = new Image();
-  img.src = "img/" + app.id + "-0.jpg"; img.alt = ""; img.className = "out";
+  img.src = "img/" + app.id + "-0.webp"; img.alt = ""; img.className = "out";
   screen.appendChild(img);
   var old = screen.querySelectorAll("img");
   requestAnimationFrame(function () { img.classList.remove("out"); });
@@ -1449,10 +1450,16 @@ setLang(saved === "ar" ? "ar" : "en", false);
 onResize();
 setScreen(APPS[0]); O.front = APPS[0]; O.lastSwap = performance.now();
 requestAnimationFrame(loop);
+(function () {
+  function warm() {
+    APPS.forEach(function (a) { for (var i = 0; i < SHOTS; i++) { var im = new Image(); im.decoding = "async"; im.src = "img/" + a.id + "-" + i + ".webp"; } });
+  }
+  window.addEventListener("load", function () { if (window.requestIdleCallback) requestIdleCallback(warm, { timeout: 1500 }); else setTimeout(warm, 300); });
+})();
 
 /* ---------- lightbox ---------- */
 var lb = $("lb"), lbImg = $("lb-img"), lbCap = $("lb-cap"), cur = null, idx = 0, lastFocus = null;
-function show() { lbImg.src = "img/" + cur.id + "-" + idx + ".jpg"; lbImg.alt = cur.name + " " + T[LANG].screen + " " + (idx + 1); lbCap.textContent = cur.name + "  ·  " + (idx + 1) + " / " + SHOTS; }
+function show() { lbImg.src = "img/" + cur.id + "-" + idx + ".webp"; lbImg.alt = cur.name + " " + T[LANG].screen + " " + (idx + 1); lbCap.textContent = cur.name + "  ·  " + (idx + 1) + " / " + SHOTS; }
 function closeLb() { lb.hidden = true; if (lastFocus) lastFocus.focus(); }
 function step(d) { idx = (idx + d + SHOTS) % SHOTS; show(); }
 document.addEventListener("click", function (e) {
