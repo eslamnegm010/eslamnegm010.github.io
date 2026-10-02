@@ -354,7 +354,7 @@ html.is-loading .intro > *, html.is-loading .hero h1 .w, html.is-loading .orbit 
   .pill-sub { height: auto; }
 }
 
-/* WhatsApp composer */
+/* WhatsApp contact dialog */
 .wa-ov { position: fixed; inset: 0; z-index: 72; background: rgba(5, 8, 14, 0.5); opacity: 0; pointer-events: none; transition: opacity .35s ease; touch-action: none; }
 .wa-ov.open { opacity: 1; pointer-events: auto; }
 .wa {
@@ -375,6 +375,22 @@ html.is-loading .intro > *, html.is-loading .hero h1 .w, html.is-loading .orbit 
 .wa-head .ico svg { width: 26px; height: 26px; }
 .wa-head h3 { font-size: 1.2rem; font-weight: 800; line-height: 1.2; }
 .wa-head .num { display: block; margin-top: 5px; font: 500 0.85rem/1.2 var(--mono); color: var(--muted); }
+.wa-pick { display: grid; gap: 10px; }
+.wa-opt {
+  display: flex; align-items: center; gap: 14px; width: 100%; box-sizing: border-box; padding: 14px; border-radius: 18px; border: 1px solid var(--line);
+  background: var(--bg); color: var(--ink); text-decoration: none; text-align: start; font: inherit; cursor: pointer;
+  transition: border-color .25s, transform .25s var(--ease);
+}
+.wa-opt:hover { border-color: color-mix(in srgb, var(--c) 55%, var(--line)); transform: translateY(-2px); }
+.wa-opt:active { transform: scale(.985); }
+.wa-opt .oi { width: 44px; height: 44px; border-radius: 13px; display: grid; place-items: center; flex: none; color: #fff; background: var(--c); }
+.wa-opt.alt .oi { background: var(--ink); color: var(--bg); }
+.wa-opt .oi svg { width: 22px; height: 22px; }
+.wa-opt .ot { display: grid; gap: 3px; flex: 1; min-width: 0; }
+.wa-opt b { font-size: 1rem; font-weight: 700; line-height: 1.25; }
+.wa-opt small { font-size: 0.85rem; color: var(--muted); line-height: 1.35; }
+.wa-opt .go { width: 18px; height: 18px; color: var(--muted); flex: none; }
+:root[dir="rtl"] .wa-opt .go { transform: scaleX(-1); }
 .wa-form { display: grid; gap: 12px; }
 .wa-f { display: grid; gap: 7px; }
 .wa-f > span { font: 500 0.72rem/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
@@ -387,12 +403,11 @@ html.is-loading .intro > *, html.is-loading .hero h1 .w, html.is-loading .orbit 
 .wa-f input:focus, .wa-f textarea:focus { outline: none; border-color: var(--c); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 22%, transparent); }
 .wa-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .wa-err { color: #d64135; font-size: 0.88rem; font-weight: 500; margin: 0; }
-.wa-err[hidden], .wa-done[hidden] { display: none; }
+.wa-err[hidden], .wa-done[hidden], .wa-pick[hidden], .wa-form[hidden] { display: none; }
 .wa .sh-btn { margin-top: 2px; }
 .wa .sh-btn[disabled] { opacity: .65; cursor: progress; }
-.wa-or { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 0.82rem; }
-.wa-or::before, .wa-or::after { content: ""; flex: 1; height: 1px; background: var(--line); }
-.wa:not(.direct) .wa-reply, .wa:not(.direct) .wa-or, .wa:not(.direct) #wa-direct { display: none; }
+.wa-instead { justify-self: center; font-size: 0.88rem; font-weight: 600; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; padding: 4px 8px; }
+.wa-instead:hover { color: var(--ink); }
 .wa-done { display: grid; justify-items: center; gap: 12px; text-align: center; padding: 18px 0 8px; }
 .wa-done .ok { width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, #25d366 16%, transparent); color: var(--c); }
 .wa-done .ok svg { width: 30px; height: 30px; }
@@ -939,15 +954,18 @@ footer { color: var(--muted); font-size: 0.85rem; display: flex; justify-content
   <div class="grab" aria-hidden="true"></div>
   <button class="wa-x" type="button" id="wa-x" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
   <div class="wa-head"><span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></span><div><h3 id="wa-title" data-t="wa.title">Message me on WhatsApp</h3><span class="num" id="wa-num" dir="ltr"></span></div></div>
-  <form class="wa-form" id="wa-form" novalidate>
+  <div class="wa-pick" id="wa-pick">
+    <a class="wa-opt" id="wa-open" href="https://wa.me/201061179829" target="_blank" rel="noopener"><span class="oi"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></span><span class="ot"><b data-t="wa.openT">Open WhatsApp</b><small data-t="wa.openS">Chat with me in the app</small></span><svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a>
+    <button class="wa-opt alt" type="button" id="wa-here"><span class="oi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg></span><span class="ot"><b data-t="wa.hereT">Send from here</b><small data-t="wa.hereS">Your message reaches my WhatsApp</small></span><svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+  </div>
+  <form class="wa-form" id="wa-form" novalidate hidden>
     <label class="wa-f"><span data-t="wa.name">Your name</span><input id="wa-name" name="name" autocomplete="name" maxlength="80" dir="auto"></label>
     <label class="wa-f"><span data-t="wa.msg">Your message</span><textarea id="wa-msg" name="message" rows="4" maxlength="2000" dir="auto"></textarea></label>
-    <label class="wa-f wa-reply"><span data-t="wa.reply">Your phone or email</span><input id="wa-reply" name="reply" autocomplete="email" maxlength="120" dir="ltr"></label>
+    <label class="wa-f"><span data-t="wa.reply">Your phone or email</span><input id="wa-reply" name="reply" autocomplete="email" maxlength="120" dir="ltr"></label>
     <input class="wa-hp" id="wa-hp" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
     <p class="wa-err" id="wa-err" role="alert" hidden></p>
-    <button class="sh-btn primary" type="submit" id="wa-send"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg><span data-t="wa.send">Send on WhatsApp</span></button>
-    <div class="wa-or"><span data-t="wa.or">or</span></div>
-    <button class="sh-btn" type="button" id="wa-direct"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg><span id="wa-direct-t" data-t="wa.direct">Send from here</span></button>
+    <button class="sh-btn primary" type="submit" id="wa-send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg><span id="wa-send-t" data-t="wa.sendBtn">Send</span></button>
+    <a class="wa-instead" id="wa-instead" href="https://wa.me/201061179829" target="_blank" rel="noopener" data-t="wa.instead">Open WhatsApp instead</a>
   </form>
   <div class="wa-done" id="wa-done" hidden><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg></span><b data-t="wa.sent">Message sent. I'll get back to you soon.</b></div>
 </div>
@@ -985,10 +1003,12 @@ var T = {
     "f3.k": "Based in", "f3.b": "Cairo, Egypt", "f3.s": "Remote or on-site",
     "c.label": "Contact", "c.title": "Have a Flutter app to build?", "c.sub": "Send me a short note about the product and the timeline.",
     "c.email": "Email", hint: "Let's talk", "c.wa": "WhatsApp", "c.fb": "Facebook", "c.copy": "Copy", emailCopied: "Email copied: eslamnegm010@gmail.com", emailIs: "Email: eslamnegm010@gmail.com", sideCopy: "Copy email", sideOpen: "Contact", copied: "Copied", pressCopy: "Press Ctrl+C",
-    "wa.title": "Message me on WhatsApp", "wa.name": "Your name", "wa.msg": "Your message", "wa.reply": "Your phone or email",
-    "wa.send": "Send on WhatsApp", "wa.or": "or", "wa.direct": "Send from here", "wa.sending": "Sending…", "wa.sent": "Message sent. I'll get back to you soon.",
+    "wa.title": "Message me on WhatsApp", "wa.openT": "Open WhatsApp", "wa.openS": "Chat with me in the app",
+    "wa.hereT": "Send from here", "wa.hereS": "Your message reaches my WhatsApp",
+    "wa.name": "Your name", "wa.msg": "Your message", "wa.reply": "Your phone or email", "wa.sendBtn": "Send", "wa.sending": "Sending…",
+    "wa.instead": "Open WhatsApp instead", "wa.sent": "Message sent. I'll get back to you soon.",
     "wa.fail": "It couldn't be sent. Please try WhatsApp.", "wa.needMsg": "Write a message first.", "wa.needReply": "Add your phone or email so I can reply.",
-    "wa.hi": "Hi {me}, this is {n}.", "wa.close": "Close",
+    "wa.close": "Close",
     "foot.a": "© 2026 Eslam Negm", "foot.b": "Flutter · Dart · Cairo",
     top: "Top", screen: "screen", name: ["Eslam", "Negm"], alt: "إسلام نجم"
   },
@@ -1016,10 +1036,12 @@ var T = {
     "f3.k": "المقر", "f3.b": "القاهرة، مصر", "f3.s": "عن بُعد أو من المكتب",
     "c.label": "تواصل", "c.title": "لديك تطبيق Flutter تريد بناءه؟", "c.sub": "أرسل لي نبذة قصيرة عن المنتج والجدول الزمني.",
     "c.email": "البريد الإلكتروني", hint: "تواصل معي", "c.wa": "واتساب", "c.fb": "فيسبوك", "c.copy": "نسخ", emailCopied: "تم نسخ البريد: eslamnegm010@gmail.com", emailIs: "البريد: eslamnegm010@gmail.com", sideCopy: "نسخ البريد", sideOpen: "تواصل", copied: "تم النسخ", pressCopy: "اضغط Ctrl+C",
-    "wa.title": "راسلني على واتساب", "wa.name": "اسمك", "wa.msg": "رسالتك", "wa.reply": "رقمك أو بريدك الإلكتروني",
-    "wa.send": "أرسل عبر واتساب", "wa.or": "أو", "wa.direct": "أرسل من هنا", "wa.sending": "جارٍ الإرسال…", "wa.sent": "وصلتني رسالتك، وسأرد عليك قريبًا.",
+    "wa.title": "راسلني على واتساب", "wa.openT": "افتح واتساب", "wa.openS": "تحدّث معي من التطبيق",
+    "wa.hereT": "أرسل من هنا", "wa.hereS": "رسالتك تصلني على واتساب",
+    "wa.name": "اسمك", "wa.msg": "رسالتك", "wa.reply": "رقمك أو بريدك الإلكتروني", "wa.sendBtn": "إرسال", "wa.sending": "جارٍ الإرسال…",
+    "wa.instead": "أو افتح واتساب", "wa.sent": "وصلتني رسالتك، وسأرد عليك قريبًا.",
     "wa.fail": "تعذّر الإرسال، جرّب واتساب.", "wa.needMsg": "اكتب رسالتك أولًا.", "wa.needReply": "أضف رقمك أو بريدك لأتمكن من الرد عليك.",
-    "wa.hi": "مرحبًا {me}، معك {n}.", "wa.close": "إغلاق",
+    "wa.close": "إغلاق",
     "foot.a": "© 2026 إسلام نجم", "foot.b": "Flutter · Dart · القاهرة",
     top: "للأعلى", screen: "شاشة", name: ["إسلام", "نجم"], alt: "Eslam Negm"
   }
@@ -1641,37 +1663,43 @@ $("copy-email").addEventListener("click", function () {
   };
   try { navigator.clipboard.writeText("eslamnegm010@gmail.com").then(done, fallback); } catch (err) { fallback(); }
 });
-/* ---------- WhatsApp composer ---------- */
+/* ---------- WhatsApp contact dialog ---------- */
 var CONTACT_API = "";
 (function () {
-  var wa = $("wa"), ov = $("wa-ov"), form = $("wa-form"), errEl = $("wa-err"), from = null, opened = 0;
+  if (!CONTACT_API) return;
+  var wa = $("wa"), ov = $("wa-ov"), form = $("wa-form"), pick = $("wa-pick"), done = $("wa-done"), errEl = $("wa-err"), from = null, opened = 0;
   var link = document.querySelector('.link[href^="https://wa.me/"]');
-  var waUrl = link.getAttribute("href");
   $("wa-num").textContent = link.querySelector(".v").textContent;
-  wa.classList.toggle("direct", !!CONTACT_API);
   function t(k) { return T[LANG][k]; }
   function val(id) { return $(id).value.trim(); }
   function fail(k, el) { errEl.textContent = t(k); errEl.hidden = false; if (el) el.focus(); }
+  function step(s) { pick.hidden = s !== "pick"; form.hidden = s !== "form"; done.hidden = s !== "done"; }
   function open(src) {
-    from = src; opened = Date.now();
+    from = src; step("pick");
     $("wa-x").setAttribute("aria-label", t("wa.close"));
     wa.style.transform = "";
     wa.classList.add("open"); ov.classList.add("open"); root.classList.add("sheet-lock");
-    if (touchUI.matches) wa.focus({ preventScroll: true }); else $("wa-name").focus({ preventScroll: true });
+    wa.focus({ preventScroll: true });
   }
   function close() {
     if (!wa.classList.contains("open")) return;
     wa.style.transform = "";
     wa.classList.remove("open"); ov.classList.remove("open"); root.classList.remove("sheet-lock");
-    if (!$("wa-done").hidden) setTimeout(function () { form.reset(); form.hidden = false; $("wa-done").hidden = true; }, 450);
+    if (!done.hidden) setTimeout(function () { form.reset(); }, 450);
     if (from) from.focus({ preventScroll: true });
   }
   document.addEventListener("click", function (e) {
     var a = e.target.closest('a[href^="https://wa.me/"]');
-    if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+    if (!a || wa.contains(a) || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
     e.preventDefault();
     side.classList.remove("open"); fab.setAttribute("aria-expanded", "false");
     open(a);
+  });
+  $("wa-open").addEventListener("click", close);
+  $("wa-instead").addEventListener("click", close);
+  $("wa-here").addEventListener("click", function () {
+    step("form"); opened = Date.now();
+    if (!touchUI.matches) $("wa-name").focus({ preventScroll: true });
   });
   ov.addEventListener("click", close);
   $("wa-x").addEventListener("click", close);
@@ -1679,32 +1707,25 @@ var CONTACT_API = "";
   form.addEventListener("input", function () { errEl.hidden = true; });
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    var n = val("wa-name"), m = val("wa-msg");
-    if (m.length < 2) return fail("wa.needMsg", $("wa-msg"));
-    var text = (n ? t("wa.hi").replace("{me}", T[LANG].name[0]).replace("{n}", n) + "\n\n" : "") + m;
-    var url = waUrl + "?text=" + encodeURIComponent(text);
-    var w = window.open(url, "_blank");
-    if (w) w.opener = null; else location.href = url;
-    close();
-  });
-  $("wa-direct").addEventListener("click", function () {
-    var n = val("wa-name"), m = val("wa-msg"), r = val("wa-reply"), btn = this;
+    var n = val("wa-name"), m = val("wa-msg"), r = val("wa-reply"), btn = $("wa-send");
     if (m.length < 2) return fail("wa.needMsg", $("wa-msg"));
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(r) && !/^\+?[\d\s().-]{7,20}$/.test(r)) return fail("wa.needReply", $("wa-reply"));
-    btn.disabled = true; $("wa-direct-t").textContent = t("wa.sending");
+    btn.disabled = true; $("wa-send-t").textContent = t("wa.sending");
     fetch(CONTACT_API, {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: n, reply: r, message: m, lang: LANG, company: $("wa-hp").value, ms: Date.now() - opened })
     }).then(function (res) {
       if (!res.ok) throw new Error(res.status);
-      form.hidden = true; $("wa-done").hidden = false;
+      step("done");
     }).catch(function () { fail("wa.fail"); }).then(function () {
-      btn.disabled = false; $("wa-direct-t").textContent = t("wa.direct");
+      btn.disabled = false; $("wa-send-t").textContent = t("wa.sendBtn");
     });
   });
   var y0 = null, dy = 0;
-  function start(e) { if (window.innerWidth > 640 || e.target.closest("input, textarea, button")) return; y0 = e.touches[0].clientY; dy = 0; wa.style.transition = "none"; }
-  wa.addEventListener("touchstart", start, { passive: true });
+  wa.addEventListener("touchstart", function (e) {
+    if (window.innerWidth > 640 || e.target.closest("input, textarea, button, a")) return;
+    y0 = e.touches[0].clientY; dy = 0; wa.style.transition = "none";
+  }, { passive: true });
   wa.addEventListener("touchmove", function (e) {
     if (y0 === null) return;
     dy = Math.max(0, e.touches[0].clientY - y0);
