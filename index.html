@@ -1664,7 +1664,7 @@ $("copy-email").addEventListener("click", function () {
   try { navigator.clipboard.writeText("eslamnegm010@gmail.com").then(done, fallback); } catch (err) { fallback(); }
 });
 /* ---------- WhatsApp contact dialog ---------- */
-var CONTACT_API = "";
+var CONTACT_API = "https://portfolio-contact.eslamnegm.workers.dev";
 (function () {
   if (!CONTACT_API) return;
   var wa = $("wa"), ov = $("wa-ov"), form = $("wa-form"), pick = $("wa-pick"), done = $("wa-done"), errEl = $("wa-err"), from = null, opened = 0;
