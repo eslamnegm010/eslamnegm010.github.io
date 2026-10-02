@@ -961,7 +961,7 @@ footer { color: var(--muted); font-size: 0.85rem; display: flex; justify-content
   <form class="wa-form" id="wa-form" novalidate hidden>
     <label class="wa-f"><span data-t="wa.name">Your name</span><input id="wa-name" name="name" autocomplete="name" maxlength="80" dir="auto"></label>
     <label class="wa-f"><span data-t="wa.msg">Your message</span><textarea id="wa-msg" name="message" rows="4" maxlength="2000" dir="auto"></textarea></label>
-    <label class="wa-f"><span data-t="wa.reply">Your phone or email</span><input id="wa-reply" name="reply" autocomplete="email" maxlength="120" dir="ltr"></label>
+    <label class="wa-f"><span data-t="wa.reply">Your WhatsApp number or email</span><input id="wa-reply" name="reply" autocomplete="email" maxlength="120" dir="ltr"></label>
     <input class="wa-hp" id="wa-hp" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
     <p class="wa-err" id="wa-err" role="alert" hidden></p>
     <button class="sh-btn primary" type="submit" id="wa-send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg><span id="wa-send-t" data-t="wa.sendBtn">Send</span></button>
@@ -1005,9 +1005,9 @@ var T = {
     "c.email": "Email", hint: "Let's talk", "c.wa": "WhatsApp", "c.fb": "Facebook", "c.copy": "Copy", emailCopied: "Email copied: eslamnegm010@gmail.com", emailIs: "Email: eslamnegm010@gmail.com", sideCopy: "Copy email", sideOpen: "Contact", copied: "Copied", pressCopy: "Press Ctrl+C",
     "wa.title": "Message me on WhatsApp", "wa.openT": "Open WhatsApp", "wa.openS": "Chat with me in the app",
     "wa.hereT": "Send from here", "wa.hereS": "Your message reaches my WhatsApp",
-    "wa.name": "Your name", "wa.msg": "Your message", "wa.reply": "Your phone or email", "wa.sendBtn": "Send", "wa.sending": "Sending…",
+    "wa.name": "Your name", "wa.msg": "Your message", "wa.reply": "Your WhatsApp number or email", "wa.sendBtn": "Send", "wa.sending": "Sending…",
     "wa.instead": "Open WhatsApp instead", "wa.sent": "Message sent. I'll get back to you soon.",
-    "wa.fail": "It couldn't be sent. Please try WhatsApp.", "wa.needMsg": "Write a message first.", "wa.needReply": "Add your phone or email so I can reply.",
+    "wa.fail": "It couldn't be sent. Please try WhatsApp.", "wa.needName": "Add your name.", "wa.needMsg": "Write a message first.", "wa.needReply": "Add your phone or email so I can reply.",
     "wa.close": "Close",
     "foot.a": "© 2026 Eslam Negm", "foot.b": "Flutter · Dart · Cairo",
     top: "Top", screen: "screen", name: ["Eslam", "Negm"], alt: "إسلام نجم"
@@ -1038,9 +1038,9 @@ var T = {
     "c.email": "البريد الإلكتروني", hint: "تواصل معي", "c.wa": "واتساب", "c.fb": "فيسبوك", "c.copy": "نسخ", emailCopied: "تم نسخ البريد: eslamnegm010@gmail.com", emailIs: "البريد: eslamnegm010@gmail.com", sideCopy: "نسخ البريد", sideOpen: "تواصل", copied: "تم النسخ", pressCopy: "اضغط Ctrl+C",
     "wa.title": "راسلني على واتساب", "wa.openT": "افتح واتساب", "wa.openS": "تحدّث معي من التطبيق",
     "wa.hereT": "أرسل من هنا", "wa.hereS": "رسالتك تصلني على واتساب",
-    "wa.name": "اسمك", "wa.msg": "رسالتك", "wa.reply": "رقمك أو بريدك الإلكتروني", "wa.sendBtn": "إرسال", "wa.sending": "جارٍ الإرسال…",
+    "wa.name": "اسمك", "wa.msg": "رسالتك", "wa.reply": "رقم واتساب أو بريدك الإلكتروني", "wa.sendBtn": "إرسال", "wa.sending": "جارٍ الإرسال…",
     "wa.instead": "أو افتح واتساب", "wa.sent": "وصلتني رسالتك، وسأرد عليك قريبًا.",
-    "wa.fail": "تعذّر الإرسال، جرّب واتساب.", "wa.needMsg": "اكتب رسالتك أولًا.", "wa.needReply": "أضف رقمك أو بريدك لأتمكن من الرد عليك.",
+    "wa.fail": "تعذّر الإرسال، جرّب واتساب.", "wa.needName": "اكتب اسمك.", "wa.needMsg": "اكتب رسالتك أولًا.", "wa.needReply": "أضف رقمك أو بريدك لأتمكن من الرد عليك.",
     "wa.close": "إغلاق",
     "foot.a": "© 2026 إسلام نجم", "foot.b": "Flutter · Dart · القاهرة",
     top: "للأعلى", screen: "شاشة", name: ["إسلام", "نجم"], alt: "Eslam Negm"
@@ -1708,6 +1708,7 @@ var CONTACT_API = "";
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     var n = val("wa-name"), m = val("wa-msg"), r = val("wa-reply"), btn = $("wa-send");
+    if (n.length < 2) return fail("wa.needName", $("wa-name"));
     if (m.length < 2) return fail("wa.needMsg", $("wa-msg"));
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(r) && !/^\+?[\d\s().-]{7,20}$/.test(r)) return fail("wa.needReply", $("wa-reply"));
     btn.disabled = true; $("wa-send-t").textContent = t("wa.sending");
