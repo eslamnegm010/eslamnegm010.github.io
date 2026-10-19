@@ -12,13 +12,13 @@
 <meta property="og:site_name" content="Eslam Negm">
 <meta property="og:title" content="Eslam Negm · Software Engineer">
 <meta property="og:description" content="Eslam Negm, Software Engineer building mobile apps with Flutter & Dart. Eight production apps on the App Store and Google Play: games, enterprise, events, social and commerce.">
-<meta property="og:image" content="https://eslamnegm.is-a.dev/og.jpg?v=3">
+<meta property="og:image" content="https://eslamnegm.is-a.dev/og.jpg?v=4">
 <meta property="og:url" content="https://eslamnegm.is-a.dev/">
 <link rel="canonical" href="https://eslamnegm.is-a.dev/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Eslam Negm · Software Engineer">
 <meta name="twitter:description" content="Eslam Negm, Software Engineer building mobile apps with Flutter & Dart. Eight production apps on the App Store and Google Play: games, enterprise, events, social and commerce.">
-<meta name="twitter:image" content="https://eslamnegm.is-a.dev/og.jpg?v=3">
+<meta name="twitter:image" content="https://eslamnegm.is-a.dev/og.jpg?v=4">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Eslam Negm","alternateName":"إسلام نجم","jobTitle":"Software Engineer","url":"https://eslamnegm.is-a.dev/","image":"https://eslamnegm.is-a.dev/img/me.jpg","address":{"@type":"PostalAddress","addressCountry":"EG"},"knowsAbout":["Flutter","Dart","Mobile application development","iOS","Android"],"sameAs":["https://github.com/eslamnegm010","https://www.linkedin.com/in/eslam-negm-37b03b3b8/","https://www.facebook.com/eSlam.neGm.Em"]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Eslam Negm","alternateName":["إسلام نجم","Eslam Negm · Software Engineer"],"url":"https://eslamnegm.is-a.dev/"}</script>
 <link rel="icon" href="/favicon.ico" sizes="48x48">
@@ -30,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Reem+Kufi:wght@600;700&display=swap">
 <style>
-/* Layout: hero = name + an "app orbit" (every shipped app circles a phone that shows whichever app passes in front);
+/* Layout: hero = name + a "hot reload studio" (each shipped app is coded, hot-reloaded, built widget by widget on a phone, then shipped);
    an app rail under the intro becomes a floating dock once you pass it; each app is a free-flowing section whose
    screens deal out like cards as it rises into view while the page takes the app's colour. English and Arabic (RTL). */
 :root {
@@ -302,9 +302,8 @@ html.is-loading .intro > *, html.is-loading .hero h1 .w, html.is-loading .orbit 
 }
 
 /* orbit */
-.orbit { position: relative; height: 600px; min-width: 0; perspective: 1200px; }
-.orbit-in { position: absolute; inset: 0; transition: transform .6s var(--ease); }
-.ring { position: absolute; left: 50%; top: 50%; border: 1px dashed var(--ring); border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+.orbit { position: relative; height: 600px; min-width: 0; }
+.orbit-in { position: absolute; inset: 0; }
 .screen {
   position: absolute; left: 50%; top: 50%; width: 200px; aspect-ratio: 9 / 19.5; transform: translate(-50%, -50%); z-index: 5;
   border-radius: 34px; padding: 6px; background: #0b0f17; box-shadow: var(--shadow), 0 0 0 1.5px #2a3242 inset, 0 0 80px -10px color-mix(in srgb, var(--hero-c, var(--accent)) 55%, transparent);
@@ -317,14 +316,40 @@ html.is-loading .intro > *, html.is-loading .hero h1 .w, html.is-loading .orbit 
   font: 500 0.75rem/1 var(--mono); color: var(--muted); letter-spacing: .06em; display: flex; align-items: center; gap: 8px; }
 .now b { color: var(--ink); font-weight: 500; }
 .now i { width: 6px; height: 6px; border-radius: 50%; background: var(--hero-c, var(--accent)); }
-.planet { position: absolute; left: 0; top: 0; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 17px; display: block; will-change: transform, opacity; }
-.planet img { width: 100%; height: 100%; border-radius: inherit; display: block; box-shadow: 0 12px 26px -10px rgba(0,0,0,.55); }
-.planet span {
-  position: absolute; left: 50%; top: calc(100% + 8px); transform: translateX(-50%) translateY(4px); white-space: nowrap; pointer-events: none;
-  font: 600 0.76rem/1 var(--body); color: var(--ink); background: var(--surface); border: 1px solid var(--line); padding: 6px 9px; border-radius: 8px;
-  opacity: 0; transition: opacity .2s, transform .2s var(--ease);
-}
-.planet:hover span, .planet:focus-visible span { opacity: 1; transform: translateX(-50%); }
+.hr-sk { position: absolute; inset: 0; z-index: 2; background: #0b0f17; transition: opacity .55s ease; }
+.hr-sk.off { opacity: 0; }
+.hr-sk i { position: absolute; left: 7%; right: 7%; border: 1.5px dashed #54c5f8; border-radius: 9px; background: rgba(84, 197, 248, .07); color: #54c5f8; font: 500 9px/1 var(--mono); font-style: normal; display: grid; place-items: center; opacity: 0; transform: scale(.92); transition: opacity .25s, transform .4s cubic-bezier(.3, 1.5, .5, 1); }
+.hr-sk i.on { opacity: 1; transform: none; }
+.hr-sk i:nth-child(1) { top: 8%; height: 7%; } .hr-sk i:nth-child(2) { top: 18%; height: 27%; } .hr-sk i:nth-child(3) { top: 48%; height: 11%; } .hr-sk i:nth-child(4) { top: 62%; height: 11%; } .hr-sk i:nth-child(5) { bottom: 4%; height: 8%; }
+.screen.flash { box-shadow: var(--shadow), 0 0 0 1.5px #2a3242 inset, 0 0 0 4px #54c5f8, 0 0 90px -6px #54c5f8; }
+.hr-card { position: absolute; z-index: 7; border-radius: 14px; border: 1px solid #1f2a44; background: rgba(11, 17, 32, .9); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); box-shadow: var(--shadow); color: #d6deef; font: 500 10.5px/1.65 var(--mono); text-align: left; }
+.hr-head { display: flex; align-items: center; gap: 6px; padding: 8px 12px; border-bottom: 1px solid #1c2742; color: #7f8bab; font-size: 10px; }
+.hr-head i { width: 8px; height: 8px; border-radius: 50%; background: #ef5f57; } .hr-head i:nth-child(2) { background: #febc2e; } .hr-head i:nth-child(3) { background: #28c840; margin-right: 4px; }
+.hr-code { left: 0; top: 60px; width: 262px; }
+.hr-lines { padding: 8px 12px 4px; }
+.hr-lines div { white-space: pre; min-height: 1.65em; overflow: hidden; }
+.hr-lines .k { color: #c792ea; } .hr-lines .t { color: #4fc3f7; } .hr-lines .f { color: #82aaff; } .hr-lines .n { color: #f78c6c; }
+.hr-cur { display: inline-block; width: 6px; height: 12px; margin-left: 1px; vertical-align: -2px; background: #54c5f8; animation: hrBlink 1s steps(1) infinite; }
+@keyframes hrBlink { 50% { opacity: 0; } }
+.hr-rl { display: flex; align-items: center; gap: 8px; padding: 6px 12px 10px; }
+.hr-btn { display: inline-flex; align-items: center; gap: 5px; padding: 4px 9px; border-radius: 7px; border: 1px solid #2b3858; color: #ffca28; transition: transform .15s, background-color .2s, color .2s; }
+.hr-btn.press { transform: scale(.9); background: #ffca28; color: #0b1120; }
+.hr-rl em { font-style: normal; color: #22c55e; opacity: 0; transition: opacity .3s; }
+.hr-rl em.on { opacity: 1; }
+.hr-tree { right: 0; top: 112px; width: 178px; padding-bottom: 6px; }
+.hr-tree div { padding: 0 12px; white-space: pre; color: #56648a; transition: color .25s; }
+.hr-tree div.on { color: #e9edf6; }
+.hr-tree div.on b { color: #54c5f8; }
+.hr-tree b { font-weight: 500; }
+.hr-ship { right: 22px; bottom: 92px; width: 230px; padding: 12px; display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 2px 10px; align-items: center; text-decoration: none; opacity: 0; transform: translateY(12px) scale(.96); transition: opacity .35s, transform .5s cubic-bezier(.3, 1.4, .5, 1), border-color .3s; }
+.hr-ship.on { opacity: 1; transform: none; }
+.hr-ship:hover { border-color: var(--hero-c, #54c5f8); }
+.hr-ship img { width: 44px; height: 44px; border-radius: 12px; grid-row: span 2; }
+.hr-ship b { font: 600 0.9rem/1.2 var(--display); color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hr-ship small { font: 500 0.74rem/1.2 var(--body); color: #9aa5ba; }
+.hr-ship .st { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.hr-ship .st span { display: inline-flex; align-items: center; gap: 5px; padding: 3px 8px; border-radius: 6px; background: rgba(34, 197, 94, .12); color: #22c55e; font-size: 10px; }
+.hr-ship .st svg { width: 11px; height: 11px; }
 
 /* app rail */
 .rail-wrap { display: grid; gap: 14px; margin-top: -56px; }
@@ -1124,7 +1149,9 @@ footer { color: var(--muted); font-size: 0.85rem; display: flex; justify-content
   .screen { width: 150px; border-radius: 26px; padding: 5px; }
   .screen-in { border-radius: 21px; }
   .now { top: calc(50% + 178px); }
-  .planet { width: 50px; height: 50px; margin: -25px 0 0 -25px; border-radius: 13px; }
+  .hr-code { left: 20px; top: 26px; width: 236px; }
+  .hr-tree { right: 20px; top: 40px; }
+  .hr-ship { right: 20px; bottom: 58px; }
   .rail-wrap { margin-top: 0; }
   .stage { grid-template-columns: minmax(0, 1fr); min-height: 0; gap: 22px; padding-block: 44px; }
   .deck { height: min(54svh, 470px); perspective: none; }
@@ -1171,13 +1198,22 @@ footer { color: var(--muted); font-size: 0.85rem; display: flex; justify-content
   .contact h2 { font-size: 1.9rem; }
   .cap h3 { font-size: 1.05rem; }
   .job h3 { font-size: 1.15rem; }
-  .orbit { height: 300px; margin-bottom: -8px; }
+  .orbit { height: 340px; margin-bottom: -8px; }
   .screen { width: 112px; border-radius: 20px; padding: 4px; }
   .screen-in { border-radius: 16px; }
-  .now { top: calc(50% + 132px); font-size: 0.68rem; }
+  .now { top: calc(50% + 132px); font-size: 0.68rem; left: 27%; }
+  .orbit .screen { left: 27%; }
+  .hr-card { font-size: 8.5px; border-radius: 11px; }
+  .hr-head { padding: 5px 9px; font-size: 8.5px; }
+  .hr-code { left: auto; right: 6px; top: 14px; width: 186px; }
+  .hr-lines { padding: 5px 9px 2px; }
+  .hr-rl { padding: 4px 9px 7px; }
+  .hr-tree { display: none; }
+  .hr-ship { right: 6px; bottom: 34px; width: 186px; padding: 9px; grid-template-columns: 34px minmax(0, 1fr); }
+  .hr-ship img { width: 34px; height: 34px; border-radius: 9px; }
+  .hr-ship b { font-size: 0.8rem; }
   .cap { padding: 20px; }
   .hero-text { gap: 16px; }
-  .planet { width: 40px; height: 40px; margin: -20px 0 0 -20px; border-radius: 11px; }
   .planet span { display: none; }
   .caps, .skills, .facts { grid-template-columns: minmax(0, 1fr); }
   .job { grid-template-columns: minmax(0, 1fr); gap: 8px; }
@@ -1291,11 +1327,13 @@ footer { color: var(--muted); font-size: 0.85rem; display: flex; justify-content
       </div>
     </div>
     <div class="orbit" id="orbit">
-      <div class="orbit-in" id="orbit-in">
-        <div class="ring" id="ring1"></div>
-        <div class="ring" id="ring2"></div>
-        <div class="screen" aria-hidden="true"><div class="screen-in" id="screen"></div></div>
-        <div class="now"><i></i><span data-t="orbiting">Now orbiting</span> <b id="now-name">Hazzoura</b></div>
+      <div class="orbit-in" id="orbit-in" dir="ltr">
+        <div class="hr-card hr-code" aria-hidden="true"><div class="hr-head"><i></i><i></i><i></i><span id="hr-file">main.dart</span></div><div class="hr-lines" id="hr-lines"></div>
+          <div class="hr-rl"><span class="hr-btn" id="hr-btn">⚡ Hot reload</span><em id="hr-ms">✓ 412 ms</em></div></div>
+        <div class="screen" aria-hidden="true"><div class="screen-in" id="screen"><div class="hr-sk" id="hr-sk"><i>AppBar</i><i>Hero</i><i>ListTile</i><i>ListTile</i><i>NavigationBar</i></div></div></div>
+        <div class="hr-card hr-tree" aria-hidden="true" id="hr-tree"><div class="hr-head">widget tree</div><div class="on">MaterialApp</div><div class="on">└ Scaffold</div><div>  ├ <b>AppBar</b></div><div>  ├ <b>Hero</b></div><div>  ├ <b>ListView</b></div><div>  │  └ <b>ListTile ×2</b></div><div>  └ <b>NavigationBar</b></div></div>
+        <a class="hr-card hr-ship" id="hr-ship" href="#work"><img id="hr-ic" src="img/hazzoura-icon.webp" alt=""><b id="hr-name">Hazzoura</b><small id="hr-tag"></small><span class="st" id="hr-st"></span></a>
+        <div class="now"><i></i><span data-t="orbiting">Now building</span> <b id="now-name">Hazzoura</b></div>
       </div>
     </div>
   </section>
@@ -1490,7 +1528,7 @@ var T = {
     avail: "Open to new Flutter projects",
     role: "Mobile Application Developer <b>· Flutter &amp; Dart</b>",
     lede: "I build scalable, high-performance apps for iOS and Android, turning complex business requirements into smooth products people enjoy using. Clean Architecture keeps every codebase easy to grow, and I take an app from the first screen to the store release. I have shipped games, e-commerce, booking, social, event and enterprise apps, and I can build whatever your product needs.",
-    see: "See the apps", orbiting: "Now orbiting", sheetSee: "See it on this page",
+    see: "See the apps", orbiting: "Now building", sheetSee: "See it on this page",
     rail: "8 apps live on the App Store and Google Play",
     "work.label": "Selected work", "work.title": "Scroll through the apps I've shipped",
     "work.sub": "Production apps for enterprises, government events, games and commerce, live on the App Store and Google Play.",
@@ -1524,7 +1562,7 @@ var T = {
     avail: "متاح لمشاريع Flutter جديدة",
     role: "مطوّر تطبيقات جوال <b>· Flutter و Dart</b>",
     lede: "أبني تطبيقات iOS وAndroid قابلة للتوسّع وعالية الأداء، وأحوّل متطلبات الأعمال المعقّدة إلى منتجات سلسة يستمتع الناس باستخدامها. أعتمد Clean Architecture ليبقى كل مشروع سهل التطوير، وأتولّى التطبيق من أول شاشة حتى النشر على المتجر. أطلقت ألعابًا ومتاجر إلكترونية وتطبيقات حجز وتواصل وفعاليات وشركات، وأستطيع بناء ما يحتاجه منتجك.",
-    see: "شاهد التطبيقات", orbiting: "يدور الآن", sheetSee: "شاهده في هذه الصفحة",
+    see: "شاهد التطبيقات", orbiting: "يُبنى الآن", sheetSee: "شاهده في هذه الصفحة",
     rail: "8 تطبيقات منشورة على App Store و Google Play",
     "work.label": "أعمال مختارة", "work.title": "تصفّح التطبيقات التي أطلقتها",
     "work.sub": "تطبيقات منشورة لشركات وفعاليات حكومية وألعاب ومتاجر إلكترونية، ومتاحة على App Store و Google Play.",
@@ -2166,7 +2204,7 @@ function applyText() {
   alt.textContent = d.alt;
   alt.setAttribute("lang", LANG === "ar" ? "en" : "ar");
   alt.setAttribute("dir", LANG === "ar" ? "ltr" : "rtl");
-  planets.forEach(function (p) { p.label.textContent = LANG === "ar" && p.app.ar ? p.app.ar : p.app.name; });
+  if (Studio) Studio.relabel();
 }
 
 function scrollToEl(el, offset) {
@@ -2235,54 +2273,90 @@ document.addEventListener("click", function (e) {
   scrollToEl(el, -64);
 });
 
-/* ---------- orbit ---------- */
-var orbit = $("orbit"), orbitIn = $("orbit-in"), screen = $("screen"), nowName = $("now-name"), hero = $("hero");
-var planets = APPS.map(function (a, i) {
-  var el = document.createElement("a");
-  el.className = "planet"; el.href = "#app-" + a.id; el.setAttribute("aria-label", a.name);
-  el.innerHTML = '<img src="img/' + a.id + '-icon.webp" alt=""><span></span>';
-  orbitIn.appendChild(el);
-  return { el: el, label: el.querySelector("span"), app: a, ring: i % 2, phase: (Math.floor(i / 2) / 4) * Math.PI * 2 + (i % 2) * 0.6 };
-});
-var O = { w: 0, h: 0, R: 0, tilt: 0.3, t: 0, speed: 1, hover: false, front: null, lastSwap: 0, visible: true, mx: 0, my: 0 };
-function measureOrbit() {
-  O.w = orbit.clientWidth; O.h = orbit.clientHeight;
-  O.R = Math.min(O.w / 2 - 34, 300);
-  var r1 = $("ring1"), r2 = $("ring2");
-  r1.style.width = (O.R * 2) + "px"; r1.style.height = (O.R * 2 * O.tilt) + "px";
-  r2.style.width = (O.R * 1.36) + "px"; r2.style.height = (O.R * 1.36 * O.tilt) + "px";
-}
+/* ---------- hero: hot reload studio ---------- */
+var screen = $("screen"), nowName = $("now-name"), hero = $("hero");
+var O = { front: null, visible: true };
 function setScreen(app) {
   var img = new Image();
   img.src = "img/" + app.id + "-0.webp"; img.alt = ""; img.className = "out";
-  screen.appendChild(img);
+  screen.insertBefore(img, $("hr-sk"));
   var old = screen.querySelectorAll("img");
   requestAnimationFrame(function () { img.classList.remove("out"); });
   for (var i = 0; i < old.length - 1; i++) { (function (o) { o.classList.add("out"); setTimeout(function () { o.remove(); }, 800); })(old[i]); }
   nowName.textContent = LANG === "ar" && app.ar ? app.ar : app.name;
   hero.style.setProperty("--hero-c", app.c);
 }
-orbit.addEventListener("pointerenter", function () { O.hover = true; });
-orbit.addEventListener("pointerleave", function () { O.hover = false; });
-function drawOrbit(dt) {
-  O.speed += ((O.hover ? 0.15 : 1) - O.speed) * 0.06;
-  if (!reduce) O.t += dt * 0.00018 * O.speed;
-  var cx = O.w / 2, cy = O.h / 2, best = -2, bestP = null;
-  planets.forEach(function (p) {
-    var rr = p.ring ? O.R * 0.68 : O.R;
-    var a = p.phase + O.t * (p.ring ? -1.35 : 1);
-    var depth = Math.sin(a);
-    var x = cx + Math.cos(a) * rr, y = cy + depth * rr * O.tilt;
-    var s = 0.62 + 0.48 * (depth + 1) / 2;
-    p.el.style.transform = "translate3d(" + x.toFixed(1) + "px," + y.toFixed(1) + "px,0) scale(" + s.toFixed(3) + ")";
-    var z = depth > 0 ? 10 + Math.round(depth * 10) : 1;
-    if (z !== p.z) { p.z = z; p.el.style.zIndex = String(z); }
-    p.el.style.opacity = (0.45 + 0.55 * (depth + 1) / 2).toFixed(2);
-    if (depth > best) { best = depth; bestP = p; }
-  });
-  var now = performance.now();
-  if (bestP && bestP.app !== O.front && now - O.lastSwap > 900) { O.front = bestP.app; O.lastSwap = now; setScreen(bestP.app); }
-}
+var HR = { hazzoura: ["HazzouraApp", "MajlisLobby"], sela: ["SelaApp", "EmployeeHub"], hajj: ["HajjExpoApp", "ExpoAgenda"], fhe: ["FalconExpoApp", "ExhibitionMap"],
+  ansaby: ["AnsabyApp", "FamilyTree"], slots: ["SlotsApp", "SalonBooking"], square: ["SquareApp", "GroceryShop"], melocanna: ["MelocannaApp", "RattanCatalog"] };
+var Studio = (function () {
+  var lines = $("hr-lines"), btn = $("hr-btn"), ms = $("hr-ms"), sk = $("hr-sk"), boxes = sk.querySelectorAll("i"), tree = $("hr-tree").querySelectorAll("div:not(.hr-head)");
+  var ship = $("hr-ship"), scr = document.querySelector(".orbit .screen"), k = 0, gen = 0, on = false;
+  function src(a) {
+    var h = HR[a.id];
+    return [
+      '<span class="k">class</span> <span class="t">' + h[0] + '</span> <span class="k">extends</span> <span class="t">App</span> {',
+      '  <span class="t">Widget</span> <span class="f">build</span>(ctx) =&gt; <span class="t">Shell</span>(',
+      '    theme: <span class="t">Brand</span>(<span class="n">0xFF' + a.c.slice(1).toUpperCase() + '</span>),',
+      '    home: <span class="t">' + h[1] + '</span>(),',
+      '  );',
+      '}'
+    ];
+  }
+  function plain(html) { var d = document.createElement("div"); d.innerHTML = html; return d.textContent; }
+  function fillShip(a) {
+    $("hr-ic").src = "img/" + a.id + "-icon.webp";
+    $("hr-name").textContent = LANG === "ar" && a.ar ? a.ar : (a.short || a.name);
+    $("hr-tag").textContent = tx(a).tag;
+    $("hr-st").innerHTML = '<span>' + APPLE + 'App Store</span>' + (a.gp ? '<span>' + PLAY + 'Google Play</span>' : '');
+    ship.href = "#app-" + a.id;
+  }
+  function paint(a) {
+    lines.innerHTML = src(a).map(function (l) { return "<div>" + l + "</div>"; }).join("");
+    $("hr-file").textContent = HR[a.id][0].replace(/App$/, "").toLowerCase() + "_app.dart";
+    Array.prototype.forEach.call(boxes, function (b) { b.classList.add("on"); });
+    Array.prototype.forEach.call(tree, function (t) { t.classList.add("on"); });
+    sk.classList.add("off"); ms.classList.add("on"); fillShip(a); ship.classList.add("on");
+    if (O.front !== a) { O.front = a; setScreen(a); }
+  }
+  function cycle(g) {
+    var a = APPS[k], code = src(a), live = function () { return g === gen; };
+    function wait(t) { return new Promise(function (ok, no) { setTimeout(function () { live() ? ok() : no("stop"); }, t); }); }
+    function typeLine(i) {
+      var row = document.createElement("div"); lines.appendChild(row);
+      var txt = plain(code[i]), n = 0;
+      return (function next() {
+        if (!live()) return Promise.reject("stop");
+        if (n >= txt.length) { row.innerHTML = code[i]; return Promise.resolve(); }
+        n = Math.min(txt.length, n + 2); row.textContent = txt.slice(0, n); row.insertAdjacentHTML("beforeend", '<span class="hr-cur"></span>');
+        return wait(18).then(next);
+      })();
+    }
+    ship.classList.remove("on"); ms.classList.remove("on"); sk.classList.remove("off");
+    nowName.textContent = LANG === "ar" && a.ar ? a.ar : a.name; hero.style.setProperty("--hero-c", a.c);
+    Array.prototype.forEach.call(boxes, function (b) { b.classList.remove("on"); });
+    Array.prototype.forEach.call(tree, function (t, i) { t.classList.toggle("on", i < 2); });
+    lines.innerHTML = ""; $("hr-file").textContent = HR[a.id][0].replace(/App$/, "").toLowerCase() + "_app.dart";
+    var chain = wait(450);
+    code.forEach(function (_, i) { chain = chain.then(function () { return typeLine(i); }); });
+    return chain.then(function () { return wait(350); }).then(function () {
+      btn.classList.add("press"); scr.classList.add("flash"); return wait(260);
+    }).then(function () {
+      btn.classList.remove("press"); ms.classList.add("on"); O.front = a; setScreen(a);
+      var c = Promise.resolve();
+      [[0, 2], [1, 3], [2, 4], [3, 5], [4, 6]].forEach(function (p) { c = c.then(function () { boxes[p[0]].classList.add("on"); tree[p[1]].classList.add("on"); return wait(230); }); });
+      return c;
+    }).then(function () { scr.classList.remove("flash"); return wait(350); }).then(function () {
+      sk.classList.add("off"); return wait(500);
+    }).then(function () { fillShip(a); ship.classList.add("on"); return wait(2600); }).then(function () { k = (k + 1) % APPS.length; });
+  }
+  return {
+    on: function () { return on; },
+    start: function () { if (on) return; on = true; var g = ++gen; (function loop() { cycle(g).then(loop, function () {}); })(); },
+    stop: function () { gen++; on = false; scr.classList.remove("flash"); btn.classList.remove("press"); paint(APPS[k]); },
+    still: function () { paint(APPS[k]); },
+    relabel: function () { if (O.front) fillShip(O.front); }
+  };
+})();
 
 /* ---------- chapters: progress follows the section's position, eased; nothing is pinned ---------- */
 var chapters = [];
@@ -2445,12 +2519,13 @@ function loop(now) {
     ch.done = Math.abs(d) < 0.0005 && Math.abs(ds) < 0.0005 && Math.abs(di) < 0.0005;
     layout(ch, ch.cur, ch.sw, ch.ic);
   });
-  if (O.visible) drawOrbit(dt);
+  var want = O.visible && !reduce && !document.documentElement.classList.contains("is-loading");
+  if (want !== Studio.on()) { if (want) Studio.start(); else Studio.stop(); }
   requestAnimationFrame(loop);
 }
 var measureQueued = false;
 function queueMeasure() { if (measureQueued) return; measureQueued = true; requestAnimationFrame(function () { measureQueued = false; measure(); }); }
-function onResize() { measureOrbit(); measureDecks(); armReveal(); measure(); read(window.scrollY); wake(); }
+function onResize() { measureDecks(); armReveal(); measure(); read(window.scrollY); wake(); }
 window.addEventListener("resize", onResize);
 if (window.ResizeObserver) new ResizeObserver(queueMeasure).observe(document.body);
 
@@ -2473,7 +2548,7 @@ function setLang(l, keepScroll) {
   renderApps(); applyText(); collectChapters(); armReveal();
   if (O.front) { nowName.textContent = l === "ar" && O.front.ar ? O.front.ar : O.front.name; }
   Array.prototype.forEach.call(document.querySelectorAll("main, .wrap > *"), function (el) { el.classList.remove("swap"); void el.offsetWidth; if (keepScroll) el.classList.add("swap"); });
-  measureOrbit(); measureDecks();
+  measureDecks();
   if (anchor) { var el = $("app-" + anchor); window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - offset, behavior: "auto" }); }
   measure(); read(window.scrollY); setActive(activeId, true); chapters.forEach(function (ch) { ch.cur = clamp(ch.target, 0, 1); ch.sw = ch.sway || 0; ch.ic = clamp(ch.it, 0, 1); layout(ch, ch.cur, ch.sw, ch.ic); });
   try { localStorage.setItem("lang", l); } catch (err) {}
@@ -2487,7 +2562,7 @@ var saved = null;
 try { saved = localStorage.getItem("lang"); } catch (err) {}
 setLang(saved === "ar" ? "ar" : "en", false);
 onResize();
-setScreen(APPS[0]); O.front = APPS[0]; O.lastSwap = performance.now();
+Studio.still();
 requestAnimationFrame(loop);
 (function () {
   function warm() {
